@@ -6,3 +6,41 @@ Corey Nagel and Matt Binsfeld
 
 
 Models:
+Static_pages -
+  mainpage/login page
+  create account
+  newsfeed- shows posts by users friends
+  search for friends
+
+Users -
+  profile page
+  preferences page
+
+
+  has a wall
+  has many relationships and microposts and comments
+  attributes:
+    first name
+    last name
+    bithdate
+    interests
+    quotes
+
+Wall-
+  belongs to user
+  has many microposts
+
+Relationship -
+  connects users to other users via friend status
+
+Micropost -
+  belongs to user and a wall
+  has many comments
+  can only be seen by user's friends
+  attributes:
+    text
+
+comment -
+  belong to microposts and user
+  attribute:
+    text

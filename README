@@ -8,13 +8,13 @@ Corey Nagel and Matt Binsfeld
 Models:
 Static_pages -
   mainpage/login page
-  create account
   newsfeed- shows posts by users friends
   search for friends
 
 Users -
   profile page
   preferences page
+  Create account
 
 
   has a wall
@@ -22,6 +22,8 @@ Users -
   attributes:
     first name
     last name
+    Location
+    School/Work
     bithdate
     interests
     quotes

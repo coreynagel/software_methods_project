@@ -1,4 +1,16 @@
 SoftwareMethodsProject::Application.routes.draw do
+  resources :comments
+
+  resources :microposts
+
+  resources :relationships
+
+  resources :walls
+
+  resources :static_pages
+
+  resources :users
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

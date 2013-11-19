@@ -1,5 +1,7 @@
 Software Engineering Methods Project
 
+The Facebook
+
 Corey Nagel, Matt Binsfeld, and Jordan Tsiao
 
 
@@ -11,11 +13,12 @@ Static_pages -
   newsfeed- shows posts by users friends
   search for friends
 
+Session - we need a session model to track when a user is logged in, dont generate this yet.
+
 Users -
   profile page
   preferences page
   Create account
-
 
   has a wall
   has many relationships and microposts and comments

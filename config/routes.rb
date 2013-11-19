@@ -1,7 +1,12 @@
 SoftwareMethodsProject::Application.routes.draw do
+
+  root to: 'static_pages#home'
+
+  match '/signup',  to: 'users#new'
+
   resources :comments
 
-  resources :microposts
+  resources :microposts, only: [:create, :destroy]
 
   resources :relationships
 

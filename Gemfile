@@ -51,4 +51,3 @@ group :test do
   gem 'mocha', :require => false
 end
 
-gem 'haml'

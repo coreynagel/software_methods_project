@@ -13,7 +13,8 @@ Static_pages -
   newsfeed- shows posts by users friends
   search for friends
 
-Session - we need a session model to track when a user is logged in, dont generate this yet.
+Session - 
+  allows user to stay logged in on revisit and page to page navigation
 
 Users -
   profile page

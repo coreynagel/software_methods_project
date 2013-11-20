@@ -4,12 +4,13 @@ SoftwareMethodsProject::Application.routes.draw do
 
   match '/signup',  to: 'users#new'
   match '/signout', to: 'sessions#destroy', via: :delete
+  match '/preferences', to: 'users#edit'
 
   resources :sessions, only: [:new, :create, :destroy]
 
   resources :comments, only: [:create, :edit, :destroy]
 
-  resources :microposts, only: [:create, :edit, :destroy]
+  resources :microposts, only: [:create, :show, :edit, :destroy]
 
   resources :relationships, only: [:create, :destroy]
 

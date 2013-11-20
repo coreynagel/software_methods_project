@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-   before_filter :signed_in_user, only: [:index, :edit, :update, :destroy,
-                                                    :following, :followers]
+  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_filter :correct_user,   only: [:edit, :update]
   
   def new
@@ -16,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      redirect_to root_path
     else
       render 'new'
     end
@@ -29,7 +28,7 @@ class UsersController < ApplicationController
 
     def signed_in_user
       store_location
-      redirect_to signin_url, notice: "Please sign in." unless signed_in?
+      redirect_to root_path, notice: "Please sign in." unless signed_in?
     end
 
     def correct_user

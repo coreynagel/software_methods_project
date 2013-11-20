@@ -1,0 +1,6 @@
+<h1>Project: The Facebook</h1>
+<h2>By Corey Nagel, Matt Binsfeld, and Jordan Tsiao</h2>
+
+<% if signed_in? %>
+	<%= link_to "Sign out", signout_path, method: "delete" %>
+<% end %>

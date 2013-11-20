@@ -5,13 +5,16 @@ gem 'rails', '3.1.0'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
+
+
 group :development, :test do
   gem 'sqlite3'
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'database_cleaner'
-  gem 'capybara'
   gem 'launchy'
   gem 'rspec-rails'
+  gem 'turn', :require => false
+  gem 'mocha', :require => false
 end
 group :test do
   gem 'cucumber-rails'
@@ -31,10 +34,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
+#gem 'haml'
 
-group :development, :test do
-	gem 'rspec-rails'
-end
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -44,10 +45,4 @@ end
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
-
-group :test do
-  # Pretty printed test output
-  gem 'turn', :require => false
-  gem 'mocha', :require => false
-end
 

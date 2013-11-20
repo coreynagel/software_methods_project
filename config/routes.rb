@@ -3,16 +3,17 @@ SoftwareMethodsProject::Application.routes.draw do
   root to: 'static_pages#home'
 
   match '/signup',  to: 'users#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
 
-  resources :comments
+  resources :sessions, only: [:new, :create, :destroy]
 
-  resources :microposts, only: [:create, :destroy]
+  resources :comments, only: [:create, :edit, :destroy]
 
-  resources :relationships
+  resources :microposts, only: [:create, :edit, :destroy]
 
-  resources :walls
+  resources :relationships, only: [:create, :destroy]
 
-  resources :static_pages
+  resources :walls, only: [:show]
 
   resources :users
 

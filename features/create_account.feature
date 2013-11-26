@@ -3,7 +3,7 @@
 Feature: Visitor Create Account
 	create an account
 	As a visitor
-	Should take me to the newsfeed upon creation
+	Should take me to the home page creation
 
 	Scenario:
 		Given I am on "the home page"

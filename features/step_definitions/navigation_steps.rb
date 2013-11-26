@@ -24,7 +24,7 @@ When /^I fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|
 end
 
 When /^I fill in "([^\"]*)" for "([^\"]*)"$/ do |value, field|
-  fill_in(field.gsub(' ', '_'), :with => value)
+  fill_in(field, :with => value)
 end
 
 When /^I fill in the following:$/ do |fields|

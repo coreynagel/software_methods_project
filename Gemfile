@@ -14,8 +14,8 @@ group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'rspec-rails'
-  gem 'turn', :require => false
+  gem 'capybara'
+  gem 'rspec-rails' 
   gem 'mocha', :require => false
 end
 group :test do
@@ -37,7 +37,7 @@ end
 
 gem 'jquery-rails'
 
-#gem 'haml'
+gem 'haml'
 
 
 # Use unicorn as the web server

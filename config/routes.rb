@@ -1,5 +1,5 @@
 SoftwareMethodsProject::Application.routes.draw do
-
+  resources :users
   root to: 'static_pages#home'
 
   match '/signup',  to: 'users#new'
@@ -15,8 +15,6 @@ SoftwareMethodsProject::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
 
   resources :walls, only: [:show]
-
-  resources :users
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -4,6 +4,7 @@ gem 'rails', '3.1.0'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'socailization'
 
+
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
@@ -14,8 +15,8 @@ group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'rspec-rails'
-  gem 'turn', :require => false
+  gem 'capybara'
+  gem 'rspec-rails' 
   gem 'mocha', :require => false
 end
 group :test do
@@ -36,7 +37,8 @@ group :assets do
 end
 
 gem 'jquery-rails'
-#gem 'haml'
+
+gem 'haml'
 
 
 # Use unicorn as the web server

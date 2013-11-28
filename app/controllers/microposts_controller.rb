@@ -1,73 +1,28 @@
 class MicropostsController < ApplicationController
+	before_filter :signed_in_user
+	before_filter :correct_user, only: [:update, :destroy]
 
-  # GET /microposts/1
-  # GET /microposts/1.json
-  def show
-    @micropost = Micropost.find(params[:id])
+def show
+	@micropost = Micropost.find(params[:id])
+end
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @micropost }
+def create
+end
+
+def update
+end
+
+def destroy
+end
+
+	private
+
+	def signed_in_user
+      store_location
+      redirect_to root_path, notice: "Please sign in." unless signed_in?
+  end	
+  def correct_user
+      @user = Post.find(params[:id]).user
+      redirect_to(root_path) unless current_user?(@user)
     end
-  end
-
-  # GET /microposts/new
-  # GET /microposts/new.json
-  def new
-    @micropost = Micropost.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @micropost }
-    end
-  end
-
-  # GET /microposts/1/edit
-  def edit
-    @micropost = Micropost.find(params[:id])
-  end
-
-  # POST /microposts
-  # POST /microposts.json
-  def create
-    @micropost = Micropost.new(params[:micropost])
-
-    respond_to do |format|
-      if @micropost.save
-        format.html { redirect_to @micropost, notice: 'Micropost was successfully created.' }
-        format.json { render json: @micropost, status: :created, location: @micropost }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @micropost.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /microposts/1
-  # PUT /microposts/1.json
-  def update
-    @micropost = Micropost.find(params[:id])
-
-    respond_to do |format|
-      if @micropost.update_attributes(params[:micropost])
-        format.html { redirect_to @micropost, notice: 'Micropost was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @micropost.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /microposts/1
-  # DELETE /microposts/1.json
-  def destroy
-    @micropost = Micropost.find(params[:id])
-    @micropost.destroy
-
-    respond_to do |format|
-      format.html { redirect_to microposts_url }
-      format.json { head :ok }
-    end
-  end
 end

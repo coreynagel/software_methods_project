@@ -7,6 +7,14 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_one :wall, dependent: :destroy
 
+  has_many :relationships
+  has_many :friends, :through => :relationships
+
+  has_many :pending_friends,
+         :through => :relationships,
+         :source => :friend,
+         :conditions => "confirmed = 0"
+
   before_save { self.first_name.downcase! }
   before_save { self.first_name.capitalize! }
   before_save { self.last_name.downcase! }

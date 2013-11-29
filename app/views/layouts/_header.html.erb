@@ -1,8 +1,11 @@
-<div style="background-color:#234599;">
-	<h1 style="color:white;">Project: The Facebook</h1>
-	<h2 style="color:white;">By Corey Nagel, Matt Binsfeld, and Jordan Tsiao</h2>
-
-	<% if signed_in? %>
+<header class="navbar navbar-fixed-top navbar-inverse" style="background-color:#234599;">
+	<div class="navbar-inner">
+		<%= link_to "Project: The Facebook", root_path, id: "logo" %>
+		<% if signed_in? %>
 		<%= link_to "Sign out", signout_path, method: "delete" %>
 	<% end %>
-</div>
+	</div>
+	<div>
+		<h2 style="color:white;">By Corey Nagel, Matt Binsfeld, and Jordan Tsiao</h2>
+	</div>
+</header>

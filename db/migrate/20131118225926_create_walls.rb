@@ -3,7 +3,7 @@ class CreateWalls < ActiveRecord::Migration
     create_table :walls do |t|
     	t.integer :user_id
 
-      	t.timestamps
+      t.timestamps
     end
     add_index :walls, [:user_id]
   end

@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_one :wall, dependent: :destroy
 
+  before_save { self.wall = Wall.create! }
+
   has_many :relationships
   has_many :friends, :through => :relationships
 
@@ -15,10 +17,8 @@ class User < ActiveRecord::Base
          :source => :friend,
          :conditions => "confirmed = 0"
 
-  before_save { self.first_name.downcase! }
-  before_save { self.first_name.capitalize! }
-  before_save { self.last_name.downcase! }
-  before_save { self.last_name.capitalize! }
+  before_save { self.first_name.downcase.capitalize! }
+  before_save { self.last_name.downcase.capitalize! }
 
   before_save { self.email.downcase! }
   before_save :create_remember_token

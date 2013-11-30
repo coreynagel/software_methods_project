@@ -7,7 +7,9 @@ def show
 end
 
 def create
+  @micropost = Micropost.new(params[:micropost])
 end
+
 
 def update
 end

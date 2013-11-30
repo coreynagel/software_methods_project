@@ -1,11 +1,30 @@
-<header class="navbar navbar-fixed-top navbar-inverse" style="background-color:#234599;">
+
+<div class="header-custom">
+  <div class="navbar navbar-inverse navbar-custom">
 	<div class="navbar-inner">
-		<%= link_to "Project: The Facebook", root_path, id: "logo" %>
+      <h2>
+        <%= link_to "Project: The Facebook", root_path, id: "logo" %>
+      </h2>
 		<% if signed_in? %>
-		<%= link_to "Sign out", signout_path, method: "delete" %>
-	<% end %>
+	    <%= link_to "Sign out", signout_path, method: "delete" %>
+	    <% end %>
+      <div>
+        <h2 class="authors">By Corey Nagel, Matt Binsfeld, and Jordan Tsiao</h2>
+      </div>
 	</div>
-	<div>
-		<h2 style="color:white;">By Corey Nagel, Matt Binsfeld, and Jordan Tsiao</h2>
-	</div>
-</header>
+  </div>
+    <div class="navbar">
+        <div class="navbar-inner">
+          <ul class="nav pull-right">
+            <li><%= link_to "Preferences", "#" %></li>
+            <li><%= link_to "Signout", "#" %></li>
+            <li>
+              <% form_tag "#", :method => 'get' do %>
+                    <%= text_field_tag :search, params[:search] %>
+                    <%= submit_tag "Search", :name => nil %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-#encoding: utf-8
+
 
 Feature: Visitor Create Account
 	create an account

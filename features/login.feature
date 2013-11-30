@@ -1,4 +1,4 @@
-#encoding: utf-8
+
 
 Feature: User Login
 	on the main page

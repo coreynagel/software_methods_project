@@ -15,7 +15,7 @@ group :development, :test do
   gem 'debugger'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'capybara'
+  gem 'capybara', '2.0.0'
   gem 'rspec-rails' 
   gem 'mocha', :require => false
 end

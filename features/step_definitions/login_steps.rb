@@ -7,7 +7,7 @@ Given /(?:I|Foobar) (?:have|has) an account/ do
 	foobar.save!
 end
 
-Given /(?:I|Foobar) (?:have:has) a micropost/ do
+Given /(?:I|Foobar) (?:have|has) a micropost/ do
   foobar = User.find_by_email("foobar@example.com")
   foobar.microposts.build[wall_id: foobar.wall, content: "blah blah blah"]
 end

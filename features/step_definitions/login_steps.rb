@@ -9,8 +9,7 @@ end
 
 Given /Foobar has a micropost/ do
   foobar = User.find_by_email("foobar@example.com")
-  foopost = Micropost.create[user_id: foobar, wall_id: foobar.wall, content: "blah blah blah"]
-  foopost.save!
+  foopost = foobar.microposts.build[wall_id: foobar.wall, content: "blah blah blah"]
 end
 
 When /I visit Foobar's user page/ do

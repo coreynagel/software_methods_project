@@ -15,6 +15,6 @@ Feature: Visitor Create Account
 		And I fill in "Confirmation" with "testing"
 		And I press "Create my account"
 		Then I am on "the home page"
-		And I should see "Welcome Foo Bar"
+		And I should see "Welcome Foo"
 
 	

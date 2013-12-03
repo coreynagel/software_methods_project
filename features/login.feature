@@ -14,4 +14,4 @@ Feature: User Login
 		And I fill in "Password" with "testing"
 		And I press "Sign in"
 		Then I am on "the home page"
-		And I should see "Welcome Foo Bar"
+		And I should see "Welcome Foo"

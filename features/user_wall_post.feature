@@ -8,4 +8,6 @@ Feature:User Wall Post
 		And I visit my user page
 		And foobar has a micropost
 	Scenario:
+		When I click foobar
+		Then I shoul visit foobar's user page
 		

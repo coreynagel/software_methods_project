@@ -1,5 +1,5 @@
 class MicropostsController < ApplicationController
-	before_filter :signed_in_user
+	before_filter :signed_in_user, only: [:create, :update, :destroy]
 	before_filter :correct_user, only: [:update, :destroy]
 
 def show
@@ -7,7 +7,14 @@ def show
 end
 
 def create
-  @micropost = Micropost.new(params[:micropost])
+  @micropost = current_user.microposts.build(params[:micropost])
+  if @micropost.save
+    flash[:success] = "Micropost created!"
+    redirect_to root_url
+  else
+    @feed_items = []
+    render 'static_pages/home'
+  end
 end
 
 
@@ -22,9 +29,15 @@ end
 	def signed_in_user
       store_location
       redirect_to root_path, notice: "Please sign in." unless signed_in?
-  end	
+  end
+
   def correct_user
       @user = Post.find(params[:id]).user
       redirect_to(root_path) unless current_user?(@user)
-    end
+  end
+
+  def user_or_friend
+
+  end
+
 end

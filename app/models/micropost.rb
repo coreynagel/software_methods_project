@@ -8,4 +8,11 @@ class Micropost < ActiveRecord::Base
   validates :content, presence: true, length: { maximum: 400 }
 
   default_scope order: 'microposts.created_at DESC'
+
+  def self.by_friends_of(user)
+    friend_user_ids = "SELECT friend FROM relationships
+                         WHERE friend_id = :user_id"
+    where("user_id IN (#{friend_user_ids}) OR user_id = :user_id",
+          user_id: user.id)
+  end
 end

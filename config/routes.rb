@@ -1,5 +1,11 @@
 SoftwareMethodsProject::Application.routes.draw do
-  resources :users
+  resources :users do
+    member do
+        get :friends
+    end
+  end
+  resources :microposts
+
   root to: 'static_pages#home'
 
   match '/signup',  to: 'users#new'
@@ -10,7 +16,7 @@ SoftwareMethodsProject::Application.routes.draw do
 
   resources :comments, only: [:create, :edit, :destroy]
 
-  resources :microposts, only: [:create, :show, :edit, :destroy]
+
 
   resources :relationships, only: [:create, :destroy]
 

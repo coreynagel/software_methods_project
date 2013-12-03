@@ -4,7 +4,7 @@ SoftwareMethodsProject::Application.routes.draw do
         get :friends
     end
   end
-  resources :microposts
+  resources :microposts, only: [:create, :show, :edit, :destroy]
 
   root to: 'static_pages#home'
 

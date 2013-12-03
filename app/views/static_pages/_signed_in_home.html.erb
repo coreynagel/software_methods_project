@@ -2,13 +2,21 @@
 
 <div class="row">
   <aside>
-  <div class="span4">
-    <h3> Welcome <%= current_user.first_name %></h3>
-    blahblahblah
-  </div>
+    <div class="span4">
+      <div>
+        <h3> Welcome <%= current_user.first_name %></h3>
+        <hr>
+        blahblahblah
+      </div>
+      <div>
+        <h3>Friends</h3>
+        <hr>
+        youre friend list will go here
+      </div>
+    </div>
   </aside>
   <div class="span7 offset1">
-          <%= render 'shared/status_update' %>
+      <%= render 'shared/status_update' %>
     <section>
       <h3>
         NewsFeed

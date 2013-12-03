@@ -11,4 +11,3 @@ Feature:User Wall Post
 	Scenario:
 		When I click Foo Bar
 		Then I should see Foo's friends
-		

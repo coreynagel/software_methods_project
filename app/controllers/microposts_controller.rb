@@ -6,6 +6,7 @@ def show
 	@micropost = Micropost.find(params[:id])
 end
 
+
 def create
   @micropost = current_user.microposts.build(params[:micropost])
   if @micropost.save

@@ -11,6 +11,7 @@ SoftwareMethodsProject::Application.routes.draw do
   match '/signup',  to: 'users#new'
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/preferences', to: 'users#edit'
+  match '/search', to: 'users#index'
 
   resources :sessions, only: [:new, :create, :destroy]
 

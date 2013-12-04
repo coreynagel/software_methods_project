@@ -1,9 +1,18 @@
 <li>
+  <h5 class="author"><%=micropost.user.name + " posted " %>
+    <% if not micropost.user == micropost.wall.user %>
+        on <%= micropost.wall.user.name %>'s wall
+    <% end  %>
+  </h5>
+  <p>
   <span class="content"><%= micropost.content %></span>
-  <span class="timestamp">
+  <span class="timestamp pull-right">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-  </span>
+
   <% if current_user?(micropost.user) %>
       <%= render 'shared/delete_micropost', object: micropost %>
   <% end %>
+      </span>
+  </p>
+
 </li>

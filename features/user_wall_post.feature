@@ -7,7 +7,7 @@ Feature:User Wall Post
 	Background:
 		Given I have an account
 		And I visit my user page
-		And Foo Bar has a micropost
+		And Foobar has a micropost
 	Scenario:
 		When I click Foo Bar
 		Then I should see Foo's friends

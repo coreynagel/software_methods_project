@@ -11,9 +11,9 @@ def create
   @micropost = current_user.microposts.build(params[:micropost])
   if @micropost.save
     flash[:success] = "Micropost created!"
-    redirect_to(user_path(@micropost.wall.user))
+    #redirect_to(user_path(@micropost.wall.user))
   else
-    redirect_to(user_path(@micropost.wall.user))
+    #redirect_to(user_path(@micropost.wall.user))
   end
 end
 

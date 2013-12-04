@@ -26,13 +26,20 @@
   <div class="span7 offset1">
 
      <%= render '/shared/post_to_wall' %>
-    <hr>
-    Wall goes here
-     <% if @user.microposts.any? %>
-        <h3>Microposts (<%= @user.wall.microposts.count %>)</h3>
-        <ol class="microposts">
+
+     <% if @user.wall.microposts.any? %>
+        <h3>
+           <%= if current_user == @user
+                "Your "
+              else
+                "#{@user.first_name}'s "
+              end
+           %>
+          Wall
+        </h3>
+        <ul class="microposts">
           <%= render @microposts %>
-        </ol>
+        </ul>
      <% end %>
   </div>
 </div>

@@ -1,5 +1,6 @@
 class RelationshipsController < ApplicationController
   before_filter :signed_in_user
+
   def self.request(user, friend)
     unless user == friend or Relationship.exists?(user, friend)
       transaction do

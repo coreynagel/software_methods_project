@@ -10,8 +10,8 @@ Feature: Add Friend From Search
 		Given I have an account
 
 	Scenario:
-		When I fill in input with bar
-		And I press enter
-		Then I should see FooBar
-		When I click friend
-		Then I should should see pending
+		When I fill in "Search People" with "bar"
+		And I press "enter"
+		Then I should see "Foo Bar"
+		When I press "Request Friend"
+		Then I should see "pending"

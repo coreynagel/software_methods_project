@@ -11,6 +11,10 @@ When /^I go to (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
+When /^I visit Google/ do
+  visit "http://www.google.com"
+end
+
 When /^I press "([^\"]*)"$/ do |button|
   click_button(button)
 end

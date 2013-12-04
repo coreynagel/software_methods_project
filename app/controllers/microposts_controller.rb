@@ -11,7 +11,7 @@ def create
   @micropost = current_user.microposts.build(params[:micropost])
   if @micropost.save
     flash[:success] = "Micropost created!"
-    #redirect_to(user_path(@micropost.wall.user))
+    redirect_to(user_path(@micropost.wall.user))
   else
     #redirect_to(user_path(@micropost.wall.user))
   end
@@ -22,6 +22,8 @@ def update
 end
 
 def destroy
+  current_user.microposts.delete
+  redirect_to(user_path(current_user))
 end
 
 	private
@@ -32,7 +34,7 @@ end
   end
 
   def correct_user
-      @user = Post.find(params[:id]).user
+      @user = Micropost.find(params[:id]).user
       redirect_to(root_path) unless current_user?(@user)
   end
 

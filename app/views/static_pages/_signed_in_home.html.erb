@@ -23,7 +23,7 @@
       </h3>
       <hr>
       news will go here
-      <% if @user.microposts.any? %>
+      <% if @microposts != nil %>
           <h3>Microposts (<%= current_user..microposts.count %>)</h3>
           <ol class="microposts">
             <%= render @microposts %>

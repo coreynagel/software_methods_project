@@ -9,9 +9,6 @@ Then /^(?:I )should see "(.*?)" on (?:.*\s)wall$/ do |posts|
 	#
 end
 
-When /^(?:I )fill out the "(.*?)" box$/ do |post|
-	#
-end
 
 Then /^(?:I )should see the "(.*?)" on the wall$/ do |post|
 	#

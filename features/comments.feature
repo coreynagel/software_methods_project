@@ -11,13 +11,13 @@ Feature:
     And I press "Sign in"
     And I have a micropost
 
-    Scenario:
+    Scenario: posting a comment
       When I visit my micropost page
       When I fill in "comment" with "my comment"
       And I press "Comment"
       Then I should see "my comment"
 
-    Scenario:
+    Scenario: visiting comments link
       Given I am on "the home page"
       When I click "comment"
       Then I should see "Comments on this Post"

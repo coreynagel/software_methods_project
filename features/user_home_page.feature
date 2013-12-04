@@ -12,6 +12,6 @@
       And I fill in "Password" with "testing"
       And I press "Sign in"
 
-    Scenario:
+    Scenario: home page shows newsfeed
       When I am on "the home page"
       Then I should see "Newsfeed"

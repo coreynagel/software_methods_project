@@ -14,9 +14,10 @@ Feature: Add Friend From Search
       And I press "Sign in"
       Then I am on "the home page"
 
-	Scenario:
+	Scenario: Add friend from search
 		When I fill in "Search People" with "bar"
 		And I press "enter"
+        Then I should be on the search page
 		Then I should see "Foo Bar"
 		When I press "Request Friend"
 		Then I should see "pending"

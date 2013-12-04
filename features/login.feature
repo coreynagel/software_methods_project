@@ -8,7 +8,7 @@ Feature: User Login
 	Background:
 		Given I have an account
 
-	Scenario:
+	Scenario: logging in
 		When I am on "the home page"
 		And I fill in "Email" with "foobar@example.com"
 		And I fill in "Password" with "testing"

@@ -13,7 +13,7 @@ Feature:
       And I press "Sign in"
       Then I am on "the home page"
 
-    Scenario:
+    Scenario: navigate away and back
       Given I visit Google
       And I go to "the home page"
       Then I should see "Welcome Foo"

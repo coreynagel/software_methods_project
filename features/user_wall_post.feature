@@ -9,6 +9,6 @@ Feature:User Wall Post
 		And I visit my user page
 		And Foobar has a micropost
 
-	Scenario:
+	Scenario: Wall post author links to authors profile
 		When I click "Foo Bar"
 		Then I should see "Foo's friends"

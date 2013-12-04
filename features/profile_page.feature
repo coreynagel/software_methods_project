@@ -14,23 +14,28 @@ Background:
   And I press "Sign in"
 
 
-Scenario: User is on own profile page
-	Given I am on my "profile" page
+  Scenario: User is on own profile page
+	Given I am on my profile page
 	Then I should see the following user information: hometown, birthday, school, job, quotes, movies, music, books
 	And I should see "posts" on my wall
 
-Scenario: User is on friend's profile page
-	Given I am on a friend's "profile" page
+  Scenario: User is on friend's profile page
+	Given I am on my friend's profile page
 	Then I should see the following user information: hometown, birthday, school, job, quotes, movies, music, books
 	And I should see "posts" on their wall
 
-Scenario: User should have ability to write a post
+  Scenario: Mutual friends on friend's profile page
+    Given I am on my friend's profile page
+    Then I should see "Mutual Friends"
+
+  Scenario: User should have ability to write a post
 	Given I am on a "profile" page
 	When I fill in "content" with "my new post"
 	And I press "post"
 	Then I should see "my new post"
 
-Scenario: User is not friend of current profile page
+  Scenario: User is not friend of current profile page
 	Given I am not a friend of someone
 	And I am on their "profile" page
 	Then I should see a "send friend request" button
+

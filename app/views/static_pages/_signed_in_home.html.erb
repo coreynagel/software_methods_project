@@ -18,20 +18,9 @@
   <div class="span7 offset1">
       <%= render 'shared/status_update' %>
     <section>
-<<<<<<< HEAD
-      <h3>
-        NewsFeed
-      </h3>
-      <hr>
-      news will go here
-      <% if @microposts != nil %>
-          <h3>Microposts (<%= current_user..microposts.count %>)</h3>
-          <ol class="microposts">
-=======
-      <% if current_user.microposts.any? %>
+      <% if @microposts %>
           <h3>Newsfeed</h3>
           <ul class="microposts">
->>>>>>> 0d1368f3f950b5d27a181f56b1b5a33b18b228ff
             <%= render @microposts %>
           </ul>
       <% end %>

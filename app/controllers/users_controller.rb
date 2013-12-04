@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @micropost = current_user.microposts.build({wall_id: @user.wall.id})
-    @microposts = @user.microposts.all
+    @microposts = @user.wall.microposts.all
   end
   
   def create

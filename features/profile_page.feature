@@ -26,9 +26,9 @@ Scenario: User is on friend's profile page
 
 Scenario: User should have ability to write a post
 	Given I am on a "profile" page
-	When I fill out the "create new post" box
+	When I fill in "content" with "my new post"
 	And I press "post"
-	Then I should see the "post" on the wall
+	Then I should see "my new post"
 
 Scenario: User is not friend of current profile page
 	Given I am not a friend of someone

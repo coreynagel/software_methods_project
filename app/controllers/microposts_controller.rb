@@ -3,7 +3,7 @@ class MicropostsController < ApplicationController
         before_filter :correct_user, only: [:update, :destroy]
 
 def show
-        @micropost = Micropost.find(params[:id])
+  @micropost = Micropost.find(params[:id])
 end
 
 
@@ -27,9 +27,9 @@ def destroy
   redirect_back_or(root_path)
 end
 
-        private
+  private
 
-        def signed_in_user
+  def signed_in_user
       redirect_to root_path, notice: "Please sign in." unless signed_in?
   end
 

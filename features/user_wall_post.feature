@@ -8,6 +8,7 @@ Feature:User Wall Post
 		Given I have an account
 		And I visit my user page
 		And Foobar has a micropost
+
 	Scenario:
-		When I click Foo Bar
-		Then I should see Foo's friends
+		When I click "Foo Bar"
+		Then I should see "Foo's friends"

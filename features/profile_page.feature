@@ -6,6 +6,14 @@ Feature: Profile Page
 	User should have ability to write a post
 	If a user is on someone who is not a friend, the user will see the user's name and a 'send friend request' button
 
+Background:
+  Given I have an account
+  And I am on "the home page"
+  And I fill in "Email" with "foobar@example.com"
+  And I fill in "Password" with "testing"
+  And I press "Sign in"
+
+
 Scenario: User is on own profile page
 	Given I am on my "profile" page
 	Then I should see the following user information: hometown, birthday, school, job, quotes, movies, music, books

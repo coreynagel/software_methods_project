@@ -1,5 +1,5 @@
 class Micropost < ActiveRecord::Base
-	attr_accessible :content
+	attr_accessible :content, :user_id, :wall_id
   belongs_to :user
   belongs_to :wall
 

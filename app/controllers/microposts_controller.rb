@@ -1,5 +1,5 @@
 class MicropostsController < ApplicationController
-	before_filter :signed_in_user, only: [:create, :update, :destroy]
+	before_filter :signed_in_user, only: [:create, :show ,:update, :destroy]
 	before_filter :correct_user, only: [:update, :destroy]
 
 def show
@@ -11,10 +11,9 @@ def create
   @micropost = current_user.microposts.build(params[:micropost])
   if @micropost.save
     flash[:success] = "Micropost created!"
-    redirect_to root_url
+    redirect_to(user_path(@micropost.wall.user))
   else
-    @feed_items = []
-    render 'static_pages/home'
+    redirect_to(user_path(@micropost.wall.user))
   end
 end
 

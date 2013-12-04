@@ -29,7 +29,7 @@ Background:
     Then I should see "Mutual Friends"
 
   Scenario: User should have ability to write a post
-	Given I am on a "profile" page
+	Given I am on  "profile" page
 	When I fill in "content" with "my new post"
 	And I press "post"
 	Then I should see "my new post"

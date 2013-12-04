@@ -1,4 +1,6 @@
 SoftwareMethodsProject::Application.routes.draw do
+  resources :friendships
+
   resources :users do
     member do
         get :friends

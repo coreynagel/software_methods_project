@@ -16,7 +16,7 @@ Feature: Add Friend From Search
 
 	Scenario: Add friend from search
 		When I fill in "Search People" with "bar"
-		And I press "enter"
+		And I hit enter
         Then I should be on the search page
 		Then I should see "Foo Bar"
 		When I press "Request Friend"

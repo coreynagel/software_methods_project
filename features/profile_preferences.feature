@@ -8,11 +8,12 @@ Feature: Profile Preferences
   Background:
     Given I am on my "profile preferences" page
 
+    #        placeholder for info tests
   Scenario: Update user information
 	When I fill out the "information" box
 	And I press "save"
 	Then I should see the new "information" box
-
+   #
   Scenario: Clear user's wall
 	When I press "clear wall"
 	Then I should see no "posts" on my wall

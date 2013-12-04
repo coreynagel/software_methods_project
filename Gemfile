@@ -10,7 +10,9 @@ gem 'bootstrap-will_paginate', '0.0.6'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-
+group :development do
+  gem "nifty-generators", :group => :development
+end
 
 group :development, :test do
   gem 'sqlite3'

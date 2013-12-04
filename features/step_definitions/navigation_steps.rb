@@ -94,3 +94,7 @@ end
 Then /^page should have (.+) message "([^\"]*)"$/ do |type, text|
   page.has_css?("p.#{type}", :text => text, :visible => true)
 end
+
+When /^I hit enter/ do
+
+end

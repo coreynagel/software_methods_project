@@ -7,7 +7,12 @@ Feature: Add Friend From Search
 	it should change to pending and notify them to confirm
 	
 	Background:
-		Given I have an account
+	  Given I have an account
+      And I am on "the home page"
+      And I fill in "Email" with "foobar@example.com"
+      And I fill in "Password" with "testing"
+      And I press "Sign in"
+      Then I am on "the home page"
 
 	Scenario:
 		When I fill in "Search People" with "bar"

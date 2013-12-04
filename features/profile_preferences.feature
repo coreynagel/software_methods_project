@@ -1,4 +1,4 @@
-s#encoding: utf-8
+#encoding: utf-8
 
 Feature: Profile Preferences
 	A user has the ability to update their user information

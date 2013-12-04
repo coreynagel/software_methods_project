@@ -15,7 +15,7 @@
         <ul class="nav pull-right">
            <% if signed_in? %>
               <li><%= link_to "Profile", user_path(current_user) %></li>
-              <li><%= link_to "Preferences", "#" %></li>
+              <li><%= link_to "Preferences", edit_user_path(current_user) %></li>
               <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
            <% end %>
         </ul>

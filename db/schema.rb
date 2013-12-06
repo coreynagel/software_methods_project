@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20131204235030) do
   create_table "relationships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
+    t.integer  "confirmed",  :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

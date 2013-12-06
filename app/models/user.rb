@@ -10,13 +10,9 @@ class User < ActiveRecord::Base
 
   before_save { self.wall = Wall.create! }
 
-  has_many :relationships
-  has_many :friends, :through => :relationships
-
-  has_many :pending_friends,
-         :through => :relationships,
-         :source => :friend,
-         :conditions => "confirmed = 0"
+  has_many :relationships , dependent: :destroy
+  has_many :friends, through: :relationships, conditions: 'confirmed =  1'
+  has_many :pending_friends, through: :relationships, source: :friend, conditions: 'confirmed = 0'
 
   before_save { self.first_name.downcase! }
   before_save { self.first_name.capitalize! }
@@ -36,6 +32,20 @@ class User < ActiveRecord::Base
 
   def name
     "#{self.first_name} #{self.last_name}"
+  end
+
+  def friend(other_user)
+    relationship = relationships.create!(friend_id: other_user.id)
+    inverse_relationship = other_user.relationships.find_by_friend_id(self.id)
+    if inverse_relationship
+      relationship.update_attribute(:confirmed, 1)
+      inverse_relationship.update_attribute(:confirmed, 1)
+    end
+  end
+
+  def unfriend(friend)
+    relationships.find_by_friend_id(friend.id).destroy
+    friend.relationships.find_by_friend_id(self.id).destroy
   end
 
   private

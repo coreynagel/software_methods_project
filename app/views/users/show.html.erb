@@ -12,9 +12,13 @@
       </p>
     </section>
     <section>
+      <% if @mutual_friends.any? and @user != current_user %>
       <h3>Mutual Friends</h3>
       <hr>
-      mutual friends go here
+        <% @mutual_friends.each do |m| %>
+          <%= m.name %>
+        <% end %>
+      <% end %>
     </section>
     <section>
       <h3><%= "#{@user.first_name}'s friends" %>   </h3>

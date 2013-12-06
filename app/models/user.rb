@@ -48,6 +48,17 @@ class User < ActiveRecord::Base
     friend.relationships.find_by_friend_id(self.id).destroy
   end
 
+  def mutual_friends(friend)
+    mutual = []
+    friends.all.each do |f|
+      if friend.friends.include?(f)
+         mutual << f
+      end
+    end
+    mutual.delete(friend)
+    return mutual
+  end
+
   private
 
   def create_remember_token

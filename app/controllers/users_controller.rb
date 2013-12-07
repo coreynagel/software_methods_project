@@ -36,6 +36,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def friend_request
+    @user = User.find(params[:id])
+    current_user.request_friend(@user)
+    redirect_back_or(root_url)
+  end
+
+  def friend_accept
+    @user = User.find(params[:id])
+    current_user.accept_friend(@user)
+    redirect_back_or(root_url)
+  end
+
   private
 
     def signed_in_user

@@ -16,6 +16,7 @@ body {
   margin-left:auto;
   margin-right:auto;
   width:100%;
+
 }
 
 .header-custom {
@@ -37,7 +38,7 @@ body {
     text-align: center;
     color:white;
     a {
-      color:white;
+      color:#eeeeee;
     }
     a:hover {
       color:black;
@@ -45,10 +46,20 @@ body {
       text-decoration: none;
     }
   }
+  h2 {
+    font-size: 1.7em;
+    letter-spacing: -1px;
+    margin-left:-5%;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: normal;
+    color: #eeeeee;
+  }
 }
 
 .navbar-custom {
-  margin-top:3%;
+  height:100px;
+  margin-top:0;
 }
 
 section {
@@ -75,31 +86,18 @@ h1 {
 
 }
 
-h2 {
-  font-size: 1.7em;
-  letter-spacing: -1px;
-  margin-left:-5%;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: normal;
-  color: white;
 
-}
 
 h3 {
   text-align:center;
   margin-bottom:10px;
   margin-top:10px;
+
 }
 
 p {
   font-size: 1.1em;
   line-height: 1.7em;
-}
-
-.navbar-custom {
-  height:100px;
-  margin-top:0;
 }
 
 #logo {
@@ -122,10 +120,9 @@ p {
 /* forms */
 
 input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
+  border: 1px solid #1088dd;
   width: 100%;
   padding: 1%;
-
   margin-top:10px;
   @include box_sizing;
 }
@@ -152,7 +149,7 @@ input {
   margin-bottom:10px;
 }
 
-.post-box {
+textarea {
   height: 100px;
   margin-bottom:5%;
 
@@ -174,5 +171,13 @@ span .author {
 hr {
   margin-top:10px;
   margin-bottom:10px;
+  border-color:#1088dd;
 }
 
+.navbar-search {
+  margin-top:-3px;
+}
+
+a {
+  color:#1088ff;
+}

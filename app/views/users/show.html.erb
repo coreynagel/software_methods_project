@@ -1,59 +1,90 @@
-
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="span4">
-    <section>
-      <h3>
-        <%= @user.name %>
-      </h3>
-      <hr>
-      <p>
-        profile info will go here
-      </p>
-    </section>
-    <section>
-      <% if @user != current_user %>
-         <h3>Mutual Friends</h3>
+<% if @user.friends.include?(current_user) or @user == current_user %>
+    <div class="row">
+      <aside class="span4">
+        <section>
+          <h3>
+            <%= @user.name %>
+          </h3>
           <hr>
-          <% if @mutual_friends.any? %>
-            <% @mutual_friends.each do |m| %>
-            <%= m.name %>
+          <p>
+            profile info will go here
+          </p>
+        </section>
+        <section>
+          <% if @user != current_user %>
+             <h3>Mutual Friends</h3>
+              <hr>
+              <% if @mutual_friends.any? %>
+                <% @mutual_friends.each do |m| %>
+                <h4>
+                  <%= link_to m.name, user_path(m) %>
+                </h4>
+                <% end %>
+              <% else %>
+                You have no friends in common
+              <% end %>
+          <% end %>
+        </section>
+        <section>
+          <h3><% if current_user != @user %>
+                <%= "#{@user.first_name}'s friends" %>
+              <% else %>
+                Your Friends
+              <% end %>
+          </h3>
+          <hr>
+          <% if @user.friends.any? %>
+            <% @user.friends.each do |f|%>
+              <h4>
+                <%= link_to f.name, user_path(f) %>
+              </h4>
             <% end %>
-          <% else %>
-            You have no friends in common
           <% end %>
-      <% end %>
-    </section>
-    <section>
-      <h3><% if current_user != @user %>
-            <%= "#{@user.first_name}'s friends" %>
-          <% else %>
-            Your Friends
-          <% end %>
-      </h3>
-      <hr>
-      users friends go here
-    </section>
+        </section>
 
-  </aside>
-  <div class="span7 offset1">
-    <%= render '/shared/post_to_wall' %>
-    <h3>
-      <%= if current_user == @user
-            "Your "
-          else
-            "#{@user.first_name}'s "
-          end
-      %>
-      Wall
-    </h3>
-    <hr>
-    <% if @user.wall.microposts.any? %>
-      <ul class="microposts">
-        <%= render @microposts %>
-      </ul>
-    <% else %>
-      There are no posts on your wall
-    <% end %>
-  </div>
-</div>
+      </aside>
+      <div class="span7 offset1">
+        <%= render '/shared/post_to_wall' %>
+        <h3>
+          <%= if current_user == @user
+                "Your "
+              else
+                "#{@user.first_name}'s "
+              end
+          %>
+          Wall
+        </h3>
+        <hr>
+        <% if @user.wall.microposts.any? %>
+          <ul class="microposts">
+            <%= render @microposts %>
+          </ul>
+        <% else %>
+          There are no posts on your wall
+        <% end %>
+      </div>
+    </div>
+<% elsif current_user.outgoing_pending_friends.include?(@user) %>
+    <aside class="span4">
+      <section>
+        <h3>
+          <%= @user.name %>
+        </h3>
+        <hr>
+        <center>Friend Request Pending</center>
+      </section>
+    </aside>
+<% else %>
+    <aside class="span4">
+      <section>
+        <h3>
+          <%= @user.name %>
+        </h3>
+        <hr>
+        <h4>
+          <%= render 'shared/request_friend' %>
+        </h4>
+      </section>
+    </aside>
+<% end %>

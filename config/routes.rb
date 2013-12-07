@@ -3,12 +3,16 @@ SoftwareMethodsProject::Application.routes.draw do
 
   resources :users do
     member do
-        get :friends
+      get :friend_request, :friend_accept
     end
   end
+
+
   resources :microposts, only: [:create, :show, :edit, :destroy]
 
   root to: 'static_pages#home'
+
+
 
   match '/signup',  to: 'users#new'
   match '/signout', to: 'sessions#destroy', via: :delete
@@ -21,7 +25,7 @@ SoftwareMethodsProject::Application.routes.draw do
 
 
 
-  resources :relationships, only: [:create, :destroy]
+  resources :relationships, only: [:destroy]
 
   resources :walls, only: [:show]
 

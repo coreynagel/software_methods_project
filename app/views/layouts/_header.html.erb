@@ -5,13 +5,12 @@
         <ul class="nav pull-left">
           <li class="span1"></li>
           <li>
-
             <form class="navbar-search pull-left">
             <input type="text" class="search-query" placeholder="Search People">
             </form>
-
           </li>
         </ul>
+       <h3 style="color:white; float:left; text-align: center" class="span6"><%= current_user.name %></h3>
         <ul class="nav pull-right">
            <% if signed_in? %>
               <li><%= link_to "Profile", user_path(current_user) %></li>
@@ -22,7 +21,7 @@
      </div>
   </div>
   <div class="title">
-    <h1 class=""><%= link_to "Project: The Facebook", root_path %></h1>
-    <h2 class="">By Corey Nagel, Matt Binsfeld, and Jordan Tsiao</h2>
+    <h1><%= link_to "Project: The Facebook", root_path %></h1>
+    <h2 >By Corey Nagel, Matt Binsfeld, and Jordan Tsiao</h2>
   </div>
 </div>

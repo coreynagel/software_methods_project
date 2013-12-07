@@ -14,8 +14,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @micropost = current_user.microposts.build({wall_id: @user.wall.id})
     @microposts = @user.wall.microposts.all
-
-    @mutual_friends = current_user.mutual_friends(@user)
+    @mutual_friends = []
+    if @user != current_user
+      @mutual_friends = current_user.mutual_friends(@user)
+    end
   end
   
   def create

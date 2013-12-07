@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131204235030) do
+ActiveRecord::Schema.define(:version => 20131118230042) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -22,13 +22,6 @@ ActiveRecord::Schema.define(:version => 20131204235030) do
   end
 
   add_index "comments", ["user_id", "post_id", "created_at"], :name => "index_comments_on_user_id_and_post_id_and_created_at"
-
-  create_table "friendships", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "friend_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "microposts", :force => true do |t|
     t.text     "content"
@@ -43,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20131204235030) do
   create_table "relationships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
-    t.integer  "confirmed",  :default => 0
+    t.string   "confirmed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

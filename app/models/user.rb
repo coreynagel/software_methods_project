@@ -11,8 +11,9 @@ class User < ActiveRecord::Base
   before_save { self.wall = Wall.create! }
 
   has_many :relationships , dependent: :destroy
-  has_many :friends, through: :relationships, conditions: 'confirmed =  1'
-  has_many :pending_friends, through: :relationships, source: :friend, conditions: 'confirmed = 0'
+  has_many :friends, through: :relationships, conditions: "confirmed =  'accepted'"
+  has_many :outgoing_pending_friends, through: :relationships, source: :friend, conditions: ["confirmed = 'pending'"]
+  has_many :incoming_pending_friends, through: :relationships, source: :friend, conditions: ["confirmed = 'requested'"]
 
   before_save { self.first_name.downcase! }
   before_save { self.first_name.capitalize! }
@@ -34,12 +35,19 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
-  def friend(other_user)
-    relationship = relationships.create!(friend_id: other_user.id)
-    inverse_relationship = other_user.relationships.find_by_friend_id(self.id)
-    if inverse_relationship
-      relationship.update_attribute(:confirmed, 1)
-      inverse_relationship.update_attribute(:confirmed, 1)
+  def request_friend(other_user)
+    transaction do
+      relationships.create!([friend_id: other_user.id, confirmed: 'pending' ])
+      other_user.relationships.create!([friend_id: self.id, confirmed: 'requested'])
+    end
+  end
+
+  def accept_friend(new_friend)
+    if relationships.find_by_friend_id(new_friend).confirmed == 'requested'
+      transaction do
+        relationships.find_by_friend_id(new_friend.id).update_attribute(:confirmed, 'accepted')
+        new_friend.relationships.find_by_friend_id(self.id).update_attribute(:confirmed, 'accepted')
+      end
     end
   end
 
@@ -50,7 +58,7 @@ class User < ActiveRecord::Base
 
   def mutual_friends(friend)
     mutual = []
-    friends.all.each do |f|
+    friends.each do |f|
       if friend.friends.include?(f)
          mutual << f
       end

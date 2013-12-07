@@ -6,13 +6,6 @@ class Relationship < ActiveRecord::Base
 
   validates_presence_of :friend_id
   validates_presence_of :user_id
-
-
-  def self.breakup(friend_1, friend_2)
-    transaction do
-      destroy(find_by_user_id_and_friend_id(friend_1, friend_2))
-      destroy(find_by_user_id_and_friend_id(friend_2, friend_1))
-    end
-  end
+  validates_presence_of :confirmed
 
 end

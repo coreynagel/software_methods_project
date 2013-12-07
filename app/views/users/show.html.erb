@@ -12,38 +12,48 @@
       </p>
     </section>
     <section>
-      <% if @mutual_friends.any? and @user != current_user %>
-      <h3>Mutual Friends</h3>
-      <hr>
-        <% @mutual_friends.each do |m| %>
-          <%= m.name %>
-        <% end %>
+      <% if @user != current_user %>
+         <h3>Mutual Friends</h3>
+          <hr>
+          <% if @mutual_friends.any? %>
+            <% @mutual_friends.each do |m| %>
+            <%= m.name %>
+            <% end %>
+          <% else %>
+            You have no friends in common
+          <% end %>
       <% end %>
     </section>
     <section>
-      <h3><%= "#{@user.first_name}'s friends" %>   </h3>
+      <h3><% if current_user != @user %>
+            <%= "#{@user.first_name}'s friends" %>
+          <% else %>
+            Your Friends
+          <% end %>
+      </h3>
       <hr>
       users friends go here
     </section>
 
   </aside>
   <div class="span7 offset1">
-
-     <%= render '/shared/post_to_wall' %>
-
-     <% if @user.wall.microposts.any? %>
-        <h3>
-           <%= if current_user == @user
-                "Your "
-              else
-                "#{@user.first_name}'s "
-              end
-           %>
-          Wall
-        </h3>
-        <ul class="microposts">
-          <%= render @microposts %>
-        </ul>
-     <% end %>
+    <%= render '/shared/post_to_wall' %>
+    <h3>
+      <%= if current_user == @user
+            "Your "
+          else
+            "#{@user.first_name}'s "
+          end
+      %>
+      Wall
+    </h3>
+    <hr>
+    <% if @user.wall.microposts.any? %>
+      <ul class="microposts">
+        <%= render @microposts %>
+      </ul>
+    <% else %>
+      There are no posts on your wall
+    <% end %>
   </div>
 </div>

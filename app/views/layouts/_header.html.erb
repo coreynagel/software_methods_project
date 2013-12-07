@@ -10,7 +10,9 @@
             </form>
           </li>
         </ul>
-       <h3 style="color:white; float:left; text-align: center" class="span6"><%= current_user.name %></h3>
+        <% if signed_in? %>
+          <h3 style="color:white; float:left; text-align: center" class="span6"><%= current_user.name %></h3>
+        <% end %>
         <ul class="nav pull-right">
            <% if signed_in? %>
               <li><%= link_to "Profile", user_path(current_user) %></li>

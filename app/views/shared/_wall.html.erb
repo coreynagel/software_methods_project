@@ -1,0 +1,17 @@
+<h3>
+  <%= if current_user == @user
+        "Your "
+      else
+        "#{@user.first_name}'s "
+      end
+  %>
+  Wall
+</h3>
+<hr>
+<% if @user.wall.microposts.any? %>
+    <ul class="microposts">
+      <%= render @microposts %>
+    </ul>
+<% else %>
+    There are no posts on your wall
+<% end %>

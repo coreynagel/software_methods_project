@@ -35,7 +35,7 @@
           </h3>
           <hr>
           <% if @user.friends.any? %>
-            <% @user.friends.each do |f|%>
+            <% @user.friends.sort_by(&:first_name).each do |f|%>
               <h4>
                 <%= link_to f.name, user_path(f) %>
               </h4>
@@ -72,7 +72,9 @@
           <%= @user.name %>
         </h3>
         <hr>
-        <center>Friend Request Pending</center>
+        <h4>
+          Friend Request Pending
+        </h4>
       </section>
     </aside>
 <% else %>

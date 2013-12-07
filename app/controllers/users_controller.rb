@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     @microposts = @user.wall.microposts.all
     @mutual_friends = []
     if @user != current_user
-      @mutual_friends = current_user.mutual_friends(@user)
+      @mutual_friends = current_user.mutual_friends(@user).sort_by(&:first_name)
     end
   end
   

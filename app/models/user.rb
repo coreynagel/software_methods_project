@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :first_name, :last_name
   attr_accessible :password, :password_confirmation
-  attr_accessible :wall_id, :microposts
+
   has_secure_password
 
   has_many :microposts , dependent: :destroy

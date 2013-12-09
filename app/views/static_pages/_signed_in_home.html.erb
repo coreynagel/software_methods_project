@@ -1,19 +1,29 @@
 
 
 <div class="row">
-  <aside>
-    <div class="span4">
+  <aside class="span4">
       <div>
         <h3> Welcome <%= current_user.first_name %></h3>
         <hr>
-        blahblahblah
+        <% if current_user.incoming_pending_friends.any? %>
+            <h4>
+              You have new <%= link_to "Friend Requests!", edit_user_path(current_user) %>
+            </h4>
+        <% else %>
+            No news today!
+        <% end %>
       </div>
-      <div>
+      <section>
         <h3>Your Friends</h3>
         <hr>
-        your friend list will go here
-      </div>
-    </div>
+        <% if current_user.friends.any? %>
+          <% current_user.friends.sort_by(&:first_name).each do |f|%>
+          <h4>
+            <%= link_to f.name, user_path(f) %>
+          </h4>
+          <% end %>
+        <% end %>
+      </section>
   </aside>
   <div class="span7 offset1">
       <%= render 'shared/status_update' %>

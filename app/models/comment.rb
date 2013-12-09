@@ -1,5 +1,6 @@
 class Comment < ActiveRecord::Base
-	attr_accessor :content, :user_id, :micropost_id
+	attr_accessible :content, :user_id, :micropost_id
+
 	belongs_to :user
 	belongs_to :micropost
 

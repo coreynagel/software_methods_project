@@ -1,10 +1,7 @@
 class WallsController < ApplicationController
 
-  def create
-
-  end
-
-  def destroy
-
-  end
+ def destroy
+   @wall = Wall.find(params[:id])
+   @wall.destroy
+ end
 end

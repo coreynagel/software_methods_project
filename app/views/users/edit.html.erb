@@ -1,18 +1,21 @@
 <div class="row">
     <aside class="span4">
       <section>
-        <h3>
-          Friend Requests
-        </h3>
-        <hr>
         <% if @incoming %>
-            <% @incoming.each do |i| %>
-            <h4>
-              <%= i.name %>
-            </h4>
-            <%= render 'shared/accept_friend', object:i %>
-            <%= render 'shared/deny_friend', object:i %>
-            <% end %>
+          <h3>
+            Friend Requests
+          </h3>
+          <hr>
+
+          <% @incoming.each do |i| %>
+              <h4>
+                <%= i.name %>
+              </h4>
+              <h4>
+                <%= render 'shared/accept_friend', object:i %>
+                <%= render 'shared/deny_friend', object:i %>
+              </h4>
+           <% end %>
         <% end %>
       </section>
       <section>

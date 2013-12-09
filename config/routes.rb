@@ -8,11 +8,12 @@ SoftwareMethodsProject::Application.routes.draw do
   end
 
 
-  resources :microposts, only: [:create, :show, :edit, :destroy]
+  resources :microposts, only: [:create, :show, :edit, :destroy] do
+    resources :comments, only: [:create, :destroy]
+  end
+
 
   root to: 'static_pages#home'
-
-
 
   match '/signup',  to: 'users#new'
   match '/signout', to: 'sessions#destroy', via: :delete
@@ -20,13 +21,9 @@ SoftwareMethodsProject::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :comments, only: [:create, :destroy]
-
-
-
   resources :relationships, only: [:destroy]
 
-  resources :walls, only: [:show]
+  resources :walls, only: [:destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

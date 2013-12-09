@@ -47,6 +47,6 @@ Micropost -
     text
 
 comment -
-  belong to microposts and user
+  belong to micropost and user
   attribute:
     text

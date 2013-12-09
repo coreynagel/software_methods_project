@@ -1,0 +1,20 @@
+<% if @comments.any? %>
+    <ol class="comments">
+      <% @comments.each do |c| %>
+
+          <li>
+            <h5 class="author"><%=c.user.name + " commented" %>
+              <% if current_user?(c.user) %>
+                  <%= render 'microposts/delete_comment', object: c %>
+              <% end %>
+            </h5>
+            <span class="content"><%= c.content %></span>
+
+            <div>
+
+              <span class="timestamp offset4">Posted <%= time_ago_in_words(c.created_at) %> ago</span>
+            </div>
+          </li>
+      <% end %>
+    </ol>
+<% end %>

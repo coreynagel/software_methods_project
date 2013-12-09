@@ -3,19 +3,22 @@ class CommentsController < ApplicationController
     before_filter :correct_user, only: [:destroy]
 
   def create
-    @comment = current_user.comments.build(params[:comment])
+    @micropost = Micropost.find(params[:micropost_id])
+    @comment = @micropost.comments.create(params[:comment])
     if @comment.save
       flash[:success] = "Comment created!"
-      redirect_back_or(root_path)
     else
-      redirect_back_or(root_path)
+
+      flash[:failure] = "#{@comment.content}  An error happened"
     end
+    redirect_to micropost_path(@micropost)
   end
 
   def destroy
+    @micropost = Micropost.find(params[:micropost_id])
     @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_back_or(root_path)
+    redirect_to micropost_path(@micropost)
   end
 
   private

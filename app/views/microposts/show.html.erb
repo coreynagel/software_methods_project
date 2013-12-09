@@ -1,20 +1,26 @@
 <div class="row">
-<p id="notice"><%= notice %></p>
-<div class="span4 ">
-<h3 class="author"><%= @micropost.user.name + " posted " %>
-  <% if not @micropost.user == @micropost.wall.user %>
-      on <%= @micropost.wall.user.name %>'s wall
-  <% end  %>
-</h3>
-<%= @micropost.content %>
-  <hr>
+    <p id="notice"><%= notice %></p>
+    <div class="span4 ">
+    <h3 class="author"><%= @micropost.user.name + " posted " %>
+      <% if not @micropost.user == @micropost.wall.user %>
+          on <%= @micropost.wall.user.name %>'s wall
+      <% end  %>
+    </h3>
+     <hr>
+    <%= @micropost.content %>
 
-  <% if current_user?(@micropost.user) %>
-      <%= link_to 'Edit', edit_micropost_path(@micropost) %>
-      <%= render 'shared/delete_micropost', object: @micropost %>
-  <% end %>
-</div>
-<div class="span7">
-<h3>Comments on this Post</h3>
-</div>
+      <% if current_user?(@micropost.user) %>
+          <%= link_to 'Edit', edit_micropost_path(@micropost) %>
+          <%= render 'shared/delete_micropost', object: @micropost %>
+      <% end %>
+    </div>
+    <div class="span7">
+      <h3>Comments on this Post</h3>
+      <hr>
+      <% if @comments.any? %>
+         <%= render '/microposts/comment', collection: @comments %>
+      <% end %>
+      <%= render 'microposts/post_comment' %>
+
+    </div>
 </div>

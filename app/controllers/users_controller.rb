@@ -34,18 +34,32 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @incoming = @user.incoming_pending_friends.sort_by(&:first_name)
+    @friends = @user.friends.sort_by(&:first_name)
   end
 
   def friend_request
     @user = User.find(params[:id])
     current_user.request_friend(@user)
-    redirect_back_or(root_url)
+    redirect_back_or(root_path)
   end
 
   def friend_accept
     @user = User.find(params[:id])
     current_user.accept_friend(@user)
-    redirect_back_or(root_url)
+    redirect_back_or(root_path)
+  end
+
+  def friend_deny
+    @user = User.find(params[:id])
+    current_user.unfriend(@user)
+    redirect_back_or(root_path)
+  end
+
+  def unfriend
+    @user = User.find(params[:id])
+    current_user.unfriend(@user)
+    redirect_back_or(root_path)
   end
 
   private

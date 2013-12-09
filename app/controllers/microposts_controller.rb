@@ -1,19 +1,25 @@
 class MicropostsController < ApplicationController
         before_filter :signed_in_user, only: [:create, :show ,:update, :destroy]
+        before_filter :user_or_friend, only: [:show]
         before_filter :correct_user, only: [:update, :destroy]
 
 def show
   @micropost = Micropost.find(params[:id])
+  @comment = @micropost.comments.build({user_id: current_user.id})
+  @comments = @micropost.comments.all
 end
 
 
 def create
-  @micropost = current_user.microposts.build(params[:micropost])
+  @micropost = current_user.microposts.create(params[:micropost])
   if @micropost.save
     flash[:success] = "Micropost created!"
-    redirect_back_or(root_path)
+
+  end
+  if current_user.wall == @micropost.wall
+    redirect_to root_path
   else
-    redirect_back_or(root_path)
+    redirect_to user_path(@micropost.wall.user)
   end
 end
 
@@ -39,7 +45,10 @@ end
   end
 
   def user_or_friend
-
+      @user = Micropost.find(params[:id]).user
+      if current_user != @user and !@user.friends.include?(current_user)
+        redirect_to root_path
+      end
   end
 
 end

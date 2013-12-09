@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(:version => 20131118230042) do
   create_table "comments", :force => true do |t|
     t.text     "content"
     t.integer  "user_id"
-    t.integer  "post_id"
+    t.integer  "micropost_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["user_id", "post_id", "created_at"], :name => "index_comments_on_user_id_and_post_id_and_created_at"
+  add_index "comments", ["user_id", "micropost_id", "created_at"], :name => "index_comments_on_user_id_and_micropost_id_and_created_at"
 
   create_table "microposts", :force => true do |t|
     t.text     "content"

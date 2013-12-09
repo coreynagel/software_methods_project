@@ -1,0 +1,15 @@
+<aside class="span4">
+  <section>
+    <h3>
+      <%= @user.name %>
+    </h3>
+    <hr>
+    <h4>
+      <%= @user.first_name %> has requested you as a friend
+      <section>
+        <%= render 'shared/accept_friend', object:@user %>
+        <%= render 'shared/deny_friend', object:@user %>
+      </section>
+    </h4>
+  </section>
+</aside>

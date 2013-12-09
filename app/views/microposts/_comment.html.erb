@@ -1,0 +1,14 @@
+<li id="<%= comment.id %>">
+  <h5 class="author"><%=comment.user.name + " commented" %>
+  </h5>
+  <span class="content"><%= comment.content %></span>
+
+  <div>
+    <% if current_user?(micropost.user) %>
+        <%= render 'microposts/delete_comment', object: comment %>
+    <% end %>
+    <span class="timestamp pull-right">
+    Posted <%= time_ago_in_words(comment.created_at) %> ago.
+   </span>
+  </div>
+</li>

@@ -1,7 +1,9 @@
 class Micropost < ActiveRecord::Base
-	attr_accessible :content, :user_id, :wall_id
+	attr_accessible :content, :user_id, :wall_id, :comments
   belongs_to :user
   belongs_to :wall
+
+  has_many :comments
 
   validates :user_id, presence: true
   validates :wall_id, presence: true

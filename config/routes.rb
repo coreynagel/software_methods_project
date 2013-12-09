@@ -3,7 +3,7 @@ SoftwareMethodsProject::Application.routes.draw do
 
   resources :users do
     member do
-      get :friend_request, :friend_accept
+      get :friend_request, :friend_accept, :friend_deny, :unfriend
     end
   end
 
@@ -16,12 +16,11 @@ SoftwareMethodsProject::Application.routes.draw do
 
   match '/signup',  to: 'users#new'
   match '/signout', to: 'sessions#destroy', via: :delete
-  match '/preferences', to: 'users#edit/:id'
   match '/search', to: 'users#index'
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :comments, only: [:create, :edit, :destroy]
+  resources :comments, only: [:create, :destroy]
 
 
 

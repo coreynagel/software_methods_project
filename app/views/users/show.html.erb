@@ -1,76 +1,12 @@
+<div class="row">
 <% provide(:title, @user.name) %>
 <% if @user.friends.include?(current_user) or @user == current_user %>
-    <div class="row">
-      <aside class="span4">
-        <section>
-          <h3>
-            <%= @user.name %>
-          </h3>
-          <hr>
-          <p>
-            profile info will go here
-          </p>
-        </section>
-        <section>
-          <% if @user != current_user %>
-             <h3>Mutual Friends</h3>
-              <hr>
-              <% if @mutual_friends.any? %>
-                <% @mutual_friends.each do |m| %>
-                <h4>
-                  <%= link_to m.name, user_path(m) %>
-                </h4>
-                <% end %>
-              <% else %>
-                You have no friends in common
-              <% end %>
-          <% end %>
-        </section>
-        <section>
-          <h3><% if current_user != @user %>
-                <%= "#{@user.first_name}'s friends" %>
-              <% else %>
-                Your Friends
-              <% end %>
-          </h3>
-          <hr>
-          <% if @user.friends.any? %>
-            <% @user.friends.sort_by(&:first_name).each do |f|%>
-              <h4>
-                <%= link_to f.name, user_path(f) %>
-              </h4>
-            <% end %>
-          <% end %>
-        </section>
-
-      </aside>
-      <div class="span7 offset1">
-        <%= render '/shared/post_to_wall' %>
-        <%= render '/shared/wall' %>
-      </div>
-    </div>
+    <%= render 'users/friend_show' %>
 <% elsif current_user.outgoing_pending_friends.include?(@user) %>
-    <aside class="span4">
-      <section>
-        <h3>
-          <%= @user.name %>
-        </h3>
-        <hr>
-        <h4>
-          Friend Request Pending
-        </h4>
-      </section>
-    </aside>
+    <%= render 'users/outgoing_pending_show' %>
+<% elsif current_user.incoming_pending_friends.include?(@user) %>
+    <%= render 'users/incoming_pending_show' %>
 <% else %>
-    <aside class="span4">
-      <section>
-        <h3>
-          <%= @user.name %>
-        </h3>
-        <hr>
-        <h4>
-          <%= render 'shared/request_friend' %>
-        </h4>
-      </section>
-    </aside>
+    <%= render 'users/nonfriend_show' %>
 <% end %>
+</div>

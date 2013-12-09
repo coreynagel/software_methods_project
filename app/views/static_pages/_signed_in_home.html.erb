@@ -28,11 +28,15 @@
   <div class="span7 offset1">
       <%= render 'shared/status_update' %>
     <section>
+      <h3>Newsfeed</h3>
+      <hr>
       <% if @microposts %>
-          <h3>Newsfeed</h3>
+
           <ul class="microposts">
             <%= render @microposts %>
           </ul>
+      <% else %>
+        There are currently no posts in your Newsfeed.
       <% end %>
     </section>
   </div>

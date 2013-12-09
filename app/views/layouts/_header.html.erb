@@ -2,6 +2,7 @@
 <div class="header-custom">
   <div class="navbar navbar-fixed-top navbar-inverse">
      <div class="navbar-inner">
+       <% if signed_in? %>
         <ul class="nav pull-left">
           <li class="span1"></li>
           <li>
@@ -10,16 +11,17 @@
             </form>
           </li>
         </ul>
-        <% if signed_in? %>
-          <h3 style="color:white; float:left; text-align: center" class="span6"><%= current_user.name %></h3>
+       <ul class="nav pull-right">
+
+             <li><%= link_to "Profile", user_path(current_user) %></li>
+             <li><%= link_to "Preferences", edit_user_path(current_user) %></li>
+             <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
+
+       </ul>
+
+          <h4><%= current_user.name%></h4>
         <% end %>
-        <ul class="nav pull-right">
-           <% if signed_in? %>
-              <li><%= link_to "Profile", user_path(current_user) %></li>
-              <li><%= link_to "Preferences", edit_user_path(current_user) %></li>
-              <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-           <% end %>
-        </ul>
+
      </div>
   </div>
   <div class="title">

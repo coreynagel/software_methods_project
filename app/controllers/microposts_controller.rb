@@ -30,7 +30,7 @@ end
 def destroy
   @micropost = Micropost.find(params[:id])
   @micropost.destroy
-  redirect_back_or(root_path)
+  redirect_to root_path
 end
 
   private

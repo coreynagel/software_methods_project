@@ -23,6 +23,11 @@ body {
   margin-top:3.5%;
   background-color: black;
   margin-bottom:25px;
+  h4 {
+    color:white;
+    float:right;
+    text-align: center;
+  }
 }
 
 .title {
@@ -177,7 +182,7 @@ hr {
 }
 
 .navbar-search {
-  margin-top:-3px;
+  margin-top:-2px;
 }
 
 a {

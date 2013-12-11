@@ -187,7 +187,55 @@ describe User do
           expect(Comment.where(id: comment.id)).to be_empty
         end
       end
+    end
 
+  end
+
+  describe "relationships specs" do
+    describe "outgoing request friend" do
+      let(:other_user) { FactoryGirl.create(:user) }
+      before do
+        @user.save
+        @user.request_friend(other_user)
+      end
+
+      its(:outgoing_pending_friends) { should include(other_user) }
+      its(:incoming_pending_friends) { should_not include(other_user) }
+      its(:friends) { should_not include(other_user) }
+    end
+
+    describe "incoming request friend" do
+      let(:other_user) { FactoryGirl.create(:user) }
+      before do
+        @user.save
+        other_user.request_friend(@user)
+      end
+
+      its(:incoming_pending_friends) { should include(other_user) }
+      its(:outgoing_pending_friends) { should_not include(other_user) }
+      its(:friends) { should_not include(other_user) }
+    end
+
+    describe "accept friend" do
+      let(:other_user) { FactoryGirl.create(:user) }
+      before do
+        @user.save
+        @user.request_friend(other_user)
+        other_user.accept_friend(@user)
+      end
+
+      its(:friends) { should include(other_user) }
+      its(:outgoing_pending_friends) { should_not include(other_user) }
+      its(:incoming_pending_friends) { should_not include(other_user) }
+
+      describe "unfriend" do
+        before do
+          @user.unfriend(other_user)
+        end
+        its(:friends) {should_not include(other_user)}
+        its(:outgoing_pending_friends) { should_not include(other_user) }
+        its(:incoming_pending_friends) { should_not include(other_user) }
+      end
     end
 
   end

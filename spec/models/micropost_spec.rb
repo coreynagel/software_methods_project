@@ -33,6 +33,11 @@ describe Micropost do
     it { should_not be_valid }
   end
 
+  describe "when content is too long" do
+    before { @micropost.content = "a" * 401 }
+    it { should_not be_valid }
+  end
+
   describe "comment assosiations" do
 
     before { @micropost.save }

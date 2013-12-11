@@ -14,4 +14,19 @@ describe Relationship do
 
     it { should be_valid }
 
+    describe "when user_id is not present" do
+      before { relationship.user_id = nil }
+      it { should_not be_valid }
+    end
+
+    describe "when friend_id is not present" do
+      before { relationship.friend_id = nil }
+      it { should_not be_valid }
+    end
+
+    describe "when confirmed is not present" do
+      before { relationship.confirmed = nil }
+      it { should_not be_valid }
+    end
+
 end

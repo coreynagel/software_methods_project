@@ -9,6 +9,7 @@ describe User do
 
   it { should respond_to(:first_name) }
   it { should respond_to(:last_name)}
+  it { should respond_to(:name)}
   it { should respond_to(:email) }
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
@@ -16,6 +17,15 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:microposts) }
   it { should respond_to(:wall) }
+  it { should respond_to(:relationships)}
+  it { should respond_to(:friends)}
+  it { should respond_to(:incoming_pending_friends)}
+  it { should respond_to(:outgoing_pending_friends)}
+  it { should respond_to(:accept_friend) }
+  it { should respond_to(:request_friend) }
+  it { should respond_to(:unfriend) }
+  it { should respond_to(:mutual_friends)}
+  it { should respond_to(:comments) }
 
   it { should be_valid }
 
@@ -153,6 +163,33 @@ describe User do
         expect(Micropost.where(id: micropost.id)).to be_empty
       end
     end
+
+    describe "comment assosiations" do
+      let!(:commented_micropost) do
+        FactoryGirl.create(:micropost, user: @user, wall: @user.wall, created_at: 1.day.ago)
+      end
+      let!(:older_comment) do
+        FactoryGirl.create(:comment, user: @user, micropost: commented_micropost, created_at: 1.day.ago)
+      end
+      let!(:newer_comment) do
+        FactoryGirl.create(:comment, user: @user, micropost: commented_micropost,  created_at: 1.hour.ago)
+      end
+
+      it "should have the right comments in the right order" do
+        expect(@user.comments.to_a).to eq [older_comment, newer_comment]
+      end
+
+      it "should destroy associated comments" do
+        comments = @user.comments.to_a
+        @user.destroy
+        expect(comments).not_to be_empty
+        comments.each do |comment|
+          expect(Comment.where(id: comment.id)).to be_empty
+        end
+      end
+
+    end
+
   end
 
 

@@ -1,10 +1,16 @@
 
 
+
 FactoryGirl.define do
+
+  sequence :email do |n|
+    "#{n}user@factory.com"
+  end
+
   factory :user do
     first_name     "Example"
-    last_name   "User1"
-    email    "user1@example.com"
+    last_name   "User"
+    email
     password "testing"
     password_confirmation "testing"
   end
@@ -12,6 +18,12 @@ FactoryGirl.define do
   factory :micropost do
     content "Lorem ipsum"
     user
+  end
+
+  factory :comment do
+    content "blah blah blah"
+    user
+    micropost
   end
 
 end

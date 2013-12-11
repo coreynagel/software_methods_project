@@ -3,7 +3,7 @@ class Micropost < ActiveRecord::Base
   belongs_to :user
   belongs_to :wall
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   validates :user_id, presence: true
   validates :wall_id, presence: true

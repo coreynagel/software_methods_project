@@ -15,14 +15,18 @@ body {
   margin-top:0%;
   margin-left:auto;
   margin-right:auto;
+
   width:100%;
 
 }
 
 .header-custom {
-  margin-top:3.5%;
-  background-color: black;
+  width:100%;
+  margin-top: 35px;
+  background-color:#1045ff;
   margin-bottom:25px;
+  margin-left:0;
+  margin-right:auto;
   h4 {
     color:white;
     float:right;
@@ -32,10 +36,10 @@ body {
 
 .title {
   padding-top:10px;
-  margin-left:auto;
-  margin-right:auto;
+
   background-color:#1045ff;
   clear:both;
+  width:100%;
   height:100px;
   h1 {
     font-size: 3em;
@@ -192,4 +196,8 @@ a {
 .content {
   display: block;
   overflow: hidden;
+}
+
+.header-search {
+  display:none;
 }

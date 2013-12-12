@@ -5,6 +5,7 @@ SoftwareMethodsProject::Application.routes.draw do
     member do
       get :friend_request, :friend_accept, :friend_deny, :unfriend
     end
+    resources :profiles, only: [:update, :destroy]
   end
 
 
@@ -13,11 +14,12 @@ SoftwareMethodsProject::Application.routes.draw do
   end
 
 
+
   root to: 'static_pages#home'
 
   match '/signup',  to: 'users#new'
   match '/signout', to: 'sessions#destroy', via: :delete
-  match '/search', to: 'users#index'
+  match '/search', to: 'users#search'
 
   resources :sessions, only: [:new, :create, :destroy]
 

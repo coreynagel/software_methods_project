@@ -5,9 +5,7 @@
         <%= @user.name %>
       </h3>
       <hr>
-      <p>
-        profile info will go here
-      </p>
+      <%= render '/users/profile' %>
     </section>
     <section>
       <% if @user != current_user %>

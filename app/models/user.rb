@@ -7,8 +7,10 @@ class User < ActiveRecord::Base
   has_many :microposts , dependent: :destroy
   has_many :comments, dependent: :destroy
   has_one :wall, dependent: :destroy
+  has_one :profile, dependent: :destroy
 
   before_save { self.wall = Wall.create! }
+  before_save { self.profile = Profile.create! }
 
   has_many :relationships , dependent: :destroy
   has_many :friends, through: :relationships, conditions: "confirmed =  'accepted'"
@@ -66,6 +68,12 @@ class User < ActiveRecord::Base
     end
     mutual.delete(friend)
     return mutual
+  end
+
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['last_name LIKE ?', "%#{search}%"])
+    end
   end
 
   private

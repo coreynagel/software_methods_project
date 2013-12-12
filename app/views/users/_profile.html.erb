@@ -1,0 +1,25 @@
+
+
+<% if !@profile.hometown.nil? %>
+  <b>Hometown: </b><%= @profile.hometown %>
+<% end %>
+<br>
+<% if !@profile.birthdate.nil? %>
+  <b>Born: </b><%= @profile.birthdate %>
+<% end %>
+<br>
+<% if !@profile.education.nil? %>
+  <b>School: </b><%= @profile.education %>
+<% end %>
+<br>
+<% if !@profile.work.nil? %>
+    <b>Work: </b><%= @profile.work %>
+<% end %>
+<br>
+<% if !@profile.quote.nil? %>
+    <b>Personal Quote: </b><%= '"' + @profile.quote + '"' %>
+<% end %>
+<br>
+<% if !@profile.interests.nil? %>
+    <b>Interests: </b><%= @profile.interests %>
+<% end %>

@@ -56,25 +56,25 @@ class UsersController < ApplicationController
   def friend_request
     @user = User.find(params[:id])
     current_user.request_friend(@user)
-    redirect_back_or(root_path)
+    redirect_to user_path(@user)
   end
 
   def friend_accept
     @user = User.find(params[:id])
     current_user.accept_friend(@user)
-    redirect_back_or(root_path)
+    redirect_to user_path(@user)
   end
 
   def friend_deny
     @user = User.find(params[:id])
     current_user.unfriend(@user)
-    redirect_back_or(root_path)
+    redirect_to edit_user_path(current_user)
   end
 
   def unfriend
     @user = User.find(params[:id])
     current_user.unfriend(@user)
-    redirect_back_or(root_path)
+    redirect_to edit_user_path(current_user)
   end
 
   private

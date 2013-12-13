@@ -72,7 +72,11 @@ class User < ActiveRecord::Base
 
   def self.search(search)
     if search
-      find(:all, :conditions => ['last_name ILIKE ?', "%#{search}%"])
+      if Rails.env.production?
+        find(:all, :conditions => ['last_name ILIKE ?', "%#{search}%"])
+      else
+        find(:all, :conditions => ['last_name LIKE ?', "%#{search}%"])
+      end
     end
   end
 

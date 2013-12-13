@@ -11,7 +11,7 @@ SoftwareMethodsProject::Application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
-  resources :profiles, only: [:update, :destroy]
+  resources :profiles, only: [:update]
 
   root to: 'static_pages#home'
 
@@ -21,7 +21,11 @@ SoftwareMethodsProject::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :walls, only: [:clear, :destroy]
+  resources :walls do
+    member do
+      get :empty
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

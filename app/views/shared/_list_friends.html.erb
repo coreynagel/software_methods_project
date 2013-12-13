@@ -10,7 +10,9 @@
       <% @friends.each do |f|%>
           <h4 class="row">
             <%= link_to f.name, user_path(f)%>
-            <%= render 'shared/unfriend', object:f %>
+            <% if current_page?(edit_user_path(current_user)) %>
+                <%= render 'shared/unfriend', object:f %>
+            <% end %>
           </h4>
       <% end %>
   <% else %>

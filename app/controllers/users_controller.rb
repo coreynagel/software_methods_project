@@ -39,19 +39,25 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @wall = @user.wall
     @profile = @user.profile
     @incoming = @user.incoming_pending_friends.sort_by(&:first_name)
     @friends = @user.friends.sort_by(&:first_name)
   end
 
   def update
-    if @user.update_attributes(params[:user])
-      flash[:success] = "Settings updated"
-      sign_in @user
-      redirect_to edit_user_path(@user)
+    if @user.authenticate(params[:user][:current_password])
+      if @user.update_attributes(params[:user])
+        flash[:success] = "Settings updated"
+        sign_in @user
+        redirect_to edit_user_path(@user)
+      else
+        flash[:failure] = "Something went wrong"
+        render 'edit'
+      end
     else
-      flash[:failure] = "Something went wrong"
-      render 'edit'
+      flash[:failure] = "Wrong Current Password"
+      redirect_to edit_user_path(@user)
     end
   end
 

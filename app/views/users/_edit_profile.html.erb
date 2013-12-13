@@ -30,10 +30,14 @@
         <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
 </div>
-<div>
+<div class="clear-wall">
   <h3>Clear Your Wall</h3>
   <hr>
-  <%= link_to "Clear Wall", clear_wall_path(current_user.wall), class: "btn btn-danger" %>
+  WARNING!! This will remove all posts from your wall permanently.
+  <br>
+  <br>
+  <%= link_to "Clear Wall", empty_wall_path(@wall), class: "btn btn-danger",
+              data: { confirm: "You sure?" } %>
 </div>
 <div>
   <h3>Update Settings</h3>
@@ -44,10 +48,13 @@
         <%= f.label :email %>
         <%= f.text_field :email %>
 
-        <%= f.label :password %>
+        <%= f.label "Current Password" %>
+        <%= f.password_field :current_password %>
+
+        <%= f.label :password, "New Password" %>
         <%= f.password_field :password %>
 
-        <%= f.label :password_confirmation, "Confirm Password" %>
+        <%= f.label :password_confirmation, "Confirm New Password" %>
         <%= f.password_field :password_confirmation %>
 
         <%= f.submit "Save changes", class: "btn btn-primary" %>

@@ -5,7 +5,7 @@ class WallsController < ApplicationController
    @wall.destroy
  end
 
-def clear
+def empty
   @wall = Wall.find(params[:id])
   @wall.microposts.each do |m|
     m.destroy

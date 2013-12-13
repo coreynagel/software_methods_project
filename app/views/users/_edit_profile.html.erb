@@ -1,4 +1,55 @@
-<h3>
-  Update Profile
-</h3>
-<hr>
+<div>
+  <h3>
+    Update Profile
+  </h3>
+  <hr>
+    <%= form_for(@profile) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        Hometown:
+        <%= f.text_field :hometown, class: "small-field" %>
+        <br>
+        Birthday (mm/dd/yyyy):
+        <%= f.text_field :birth_month, class: "date-field"%>/
+        <%= f.text_field :birth_day, class: "date-field" %>/
+        <%= f.text_field :birth_year, class: "date-field" %>
+        <br>
+        School:
+        <%= f.text_field :education, class: "mid-field" %>
+        <br>
+        Work:
+        <%= f.text_field :work, class: "mid-field" %>
+        <br>
+        Personal Quote:
+        <br>
+        <%= f.text_field :quote %>
+        <br>
+        Interests:
+        <%= f.text_area :interests %>
+        <br>
+        <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+</div>
+<div>
+  <h3>Clear Your Wall</h3>
+  <hr>
+  <%= link_to "Clear Wall", clear_wall_path(current_user.wall), class: "btn btn-danger" %>
+</div>
+<div>
+  <h3>Update Settings</h3>
+  <hr>
+    <%= form_for(@user) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+
+        <%= f.label :password_confirmation, "Confirm Password" %>
+        <%= f.password_field :password_confirmation %>
+
+        <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+</div>

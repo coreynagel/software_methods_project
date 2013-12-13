@@ -9,9 +9,6 @@ class User < ActiveRecord::Base
   has_one :wall, dependent: :destroy
   has_one :profile, dependent: :destroy
 
-  before_save { self.wall = Wall.create! }
-  before_save { self.profile = Profile.create! }
-
   has_many :relationships , dependent: :destroy
   has_many :friends, through: :relationships, conditions: "confirmed =  'accepted'"
   has_many :outgoing_pending_friends, through: :relationships, source: :friend, conditions: ["confirmed = 'pending'"]

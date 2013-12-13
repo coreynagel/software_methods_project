@@ -1,11 +1,9 @@
 SoftwareMethodsProject::Application.routes.draw do
-  resources :friendships
 
   resources :users do
     member do
       get :friend_request, :friend_accept, :friend_deny, :unfriend
     end
-    resources :profiles, only: [:update, :destroy]
   end
 
 
@@ -13,7 +11,7 @@ SoftwareMethodsProject::Application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
-
+  resources :profiles, only: [:update, :destroy]
 
   root to: 'static_pages#home'
 
@@ -23,9 +21,7 @@ SoftwareMethodsProject::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :relationships, only: [:destroy]
-
-  resources :walls, only: [:destroy]
+  resources :walls, only: [:clear, :destroy]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

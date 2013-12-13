@@ -2,11 +2,12 @@ class ProfilesController < ApplicationController
 
 
   def update
-    if @user.update_attributes(params[:user])
+    @profile = Profile.find(params[:id])
+    if @profile.update_attributes(params[:profile])
       flash[:success] = "Profile updated"
-      sign_in @user
       redirect_to edit_user_path(@user)
     else
+      flash[:failure] = "Something went wrong: #{params[:profile]}"
       redirect_to edit_user_path(@user)
     end
   end

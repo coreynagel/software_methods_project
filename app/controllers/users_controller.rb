@@ -8,15 +8,14 @@ class UsersController < ApplicationController
   end
 
   def search
-    @last_search = params[:search]
-    @users = User.search(params[:search])
-
+    @search = params[:search]
+    @users = User.search(@search)
   end
-
 
   def show
     @user = User.find(params[:id])
     @profile = @user.profile
+    @friends = @user.friends.sort_by(&:first_name)
     @micropost = current_user.microposts.build({wall_id: @user.wall.id})
     @microposts = @user.wall.microposts.all
     @mutual_friends = []
@@ -27,7 +26,8 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-
+    @user.wall = Wall.create!
+    @user.profile = Profile.create!
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to the Facebook Project!"
@@ -39,16 +39,18 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @profile = @user.profile
     @incoming = @user.incoming_pending_friends.sort_by(&:first_name)
     @friends = @user.friends.sort_by(&:first_name)
   end
 
   def update
     if @user.update_attributes(params[:user])
-      flash[:success] = "Profile updated"
+      flash[:success] = "Settings updated"
       sign_in @user
       redirect_to edit_user_path(@user)
     else
+      flash[:failure] = "Something went wrong"
       render 'edit'
     end
   end

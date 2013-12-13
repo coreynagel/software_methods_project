@@ -138,6 +138,21 @@ input, textarea, select, .uneditable-input {
   @include box_sizing;
 }
 
+.small-field {
+  width:200px;
+  border: 1px solid #1088dd;
+}
+
+.mid-field {
+  width:300px;
+  border: 1px solid #1088dd;
+}
+
+.date-field {
+  width:55px;
+  border: 1px solid #1088dd;
+}
+
 input {
   height: auto !important;
 }

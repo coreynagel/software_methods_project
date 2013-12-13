@@ -2,24 +2,25 @@
 
 <% if !@profile.hometown.nil? %>
   <b>Hometown: </b><%= @profile.hometown %>
+  <br>
 <% end %>
-<br>
 <% if !@profile.birthdate.nil? %>
   <b>Born: </b><%= @profile.birthdate %>
+  <br>
 <% end %>
-<br>
+
 <% if !@profile.education.nil? %>
   <b>School: </b><%= @profile.education %>
+  <br>
 <% end %>
-<br>
 <% if !@profile.work.nil? %>
-    <b>Work: </b><%= @profile.work %>
+  <b>Work: </b><%= @profile.work %>
+  <br>
 <% end %>
-<br>
 <% if !@profile.quote.nil? %>
-    <b>Personal Quote: </b><%= '"' + @profile.quote + '"' %>
+    <b>Personal Quote: </b><%= @profile.quote%>
+    <br>
 <% end %>
-<br>
 <% if !@profile.interests.nil? %>
     <b>Interests: </b><%= @profile.interests %>
 <% end %>

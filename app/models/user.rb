@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
 
   def self.search(search)
     if search
-      find(:all, :conditions => ['last_name LIKE ?', "%#{search}%"])
+      find(:all, :conditions => ['last_name ILIKE ?', "%#{search}%"])
     end
   end
 

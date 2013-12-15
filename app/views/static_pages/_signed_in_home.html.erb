@@ -5,10 +5,15 @@
       <section>
         <h3> Welcome <%= current_user.first_name %></h3>
         <hr>
-        <% if current_user.incoming_pending_friends.any? %>
+        <% if current_user.incoming_pending_friends.any? or !current_user.profile.filled_out  %>
+            <% if current_user.incoming_pending_friends.any? %>
             <h4>
               You have new <%= link_to "Friend Requests!", edit_user_path(current_user) %>
             </h4>
+            <% end %>
+            <% if !current_user.profile.filled_out %>
+                <h4>Come fill out your profile <%= link_to "HERE!", edit_user_path(current_user) %></h4>
+            <% end %>
         <% else %>
             No news today!
         <% end %>

@@ -37,4 +37,9 @@ class Profile < ActiveRecord::Base
     self.birth_year ||= ''
     self.quote ||= ''
   end
+
+  def filled_out
+    !self.hometown.empty? or !self.work.empty? or !self.education.empty? or !self.birthdate.nil? or !self.interests.empty? or (self.quote.length > 2)
+  end
 end
+

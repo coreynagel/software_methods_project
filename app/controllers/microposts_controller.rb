@@ -17,7 +17,7 @@ def create
 
   end
   if current_user.wall == @micropost.wall
-    redirect_to root_path
+    redirect_back_or root_path
   else
     redirect_to user_path(@micropost.wall.user)
   end

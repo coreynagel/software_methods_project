@@ -3,7 +3,7 @@
       <% @comments.each do |c| %>
 
           <li>
-            <h5 class="author"><%=c.user.name + " commented" %>
+            <h5 class="author"><%= link_to c.user.name, user_path(c.user)%> commented
               <% if current_user?(c.user) %>
                   <%= render 'microposts/delete_comment', object: c %>
               <% end %>

@@ -1,7 +1,7 @@
 <li>
-  <h5 class="author"><%=micropost.user.name + " posted " %>
+  <h5 class="author"><%= link_to micropost.user.name, user_path(micropost.user) %> posted
     <% if not micropost.user == micropost.wall.user %>
-        on <%= micropost.wall.user.name %>'s wall
+        on <%= link_to micropost.wall.user.name + "'s ", user_path(micropost.wall.user) %>wall
     <% end  %>
     <% if current_user?(micropost.user) %>
         <%= render 'shared/delete_micropost', object: micropost %>

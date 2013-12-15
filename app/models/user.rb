@@ -77,6 +77,11 @@ class User < ActiveRecord::Base
     end
   end
 
+  def newsfeed
+    friend_ids = "SELECT friend_id FROM relationships WHERE user_id = :user_id AND confirmed = 'accepted' "
+    Micropost.where("user_id IN (#{friend_ids}) OR user_id = :user_id", user_id: self.id)
+  end
+
   private
 
   def create_remember_token

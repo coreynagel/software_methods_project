@@ -46,17 +46,17 @@
         <%= render 'shared/error_messages', object: f.object %>
 
         <%= f.label :email %>
-        <%= f.text_field :email %>
+        <%= f.text_field :email, class: "mid-field" %>
 
         <%= f.label "Current Password" %>
-        <%= f.password_field :current_password %>
+        <%= f.password_field :current_password, class: "mid-field" %>
 
         <%= f.label :password, "New Password" %>
-        <%= f.password_field :password %>
+        <%= f.password_field :password, class: "mid-field" %>
 
         <%= f.label :password_confirmation, "Confirm New Password" %>
-        <%= f.password_field :password_confirmation %>
-
+        <%= f.password_field :password_confirmation, class: "mid-field" %>
+        <br>
         <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
 </div>

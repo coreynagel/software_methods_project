@@ -130,27 +130,12 @@ p {
 
 /* forms */
 
-input, textarea, select, .uneditable-input {
+input, textarea, select, .uneditable-input{
   border: 1px solid #1088dd;
   width: 100%;
   padding: 1%;
   margin-top:10px;
   @include box_sizing;
-}
-
-.small-field {
-  width:200px;
-  border: 1px solid #1088dd;
-}
-
-.mid-field {
-  width:300px;
-  border: 1px solid #1088dd;
-}
-
-.date-field {
-  width:55px;
-  border: 1px solid #1088dd;
 }
 
 input {
@@ -219,4 +204,19 @@ a {
 
 .clear-wall {
   text-align:center;
+}
+
+.small-field {
+  width:200px;
+  border: 1px solid #1088dd;
+}
+
+.mid-field {
+  width:300px;
+  border: 1px solid #1088dd;
+}
+
+.date-field {
+  width:55px;
+  border: 1px solid #1088dd;
 }

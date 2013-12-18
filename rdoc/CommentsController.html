@@ -74,16 +74,6 @@
     
     <li><a href="#method-i-destroy">#destroy</a>
     
-    <li><a href="#method-i-edit">#edit</a>
-    
-    <li><a href="#method-i-index">#index</a>
-    
-    <li><a href="#method-i-new">#new</a>
-    
-    <li><a href="#method-i-show">#show</a>
-    
-    <li><a href="#method-i-update">#update</a>
-    
   </ul>
 </nav>
 
@@ -115,11 +105,19 @@
   
     <li><a href="./CommentsHelper.html">CommentsHelper</a>
   
+    <li><a href="./Like.html">Like</a>
+  
+    <li><a href="./LikesController.html">LikesController</a>
+  
     <li><a href="./Micropost.html">Micropost</a>
   
     <li><a href="./MicropostsController.html">MicropostsController</a>
   
     <li><a href="./MicropostsHelper.html">MicropostsHelper</a>
+  
+    <li><a href="./Profile.html">Profile</a>
+  
+    <li><a href="./ProfilesController.html">ProfilesController</a>
   
     <li><a href="./Relationship.html">Relationship</a>
   
@@ -191,24 +189,31 @@
 
         <div class="method-description">
           
-          <p>POST /comments POST /comments.json</p>
+          <h1 id="method-i-create-label-Creates+a+comment%3A">Creates a comment:</h1>
+<ul><li>
+<p>find micropost commenting on</p>
+</li><li>
+<p>create comment from params</p>
+</li><li>
+<p>show save success or failure</p>
+</li><li>
+<p>redirect to path of post</p>
+</li></ul>
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 42</span>
+            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 10</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:comment</span>])
+  <span class="ruby-ivar">@micropost</span> = <span class="ruby-constant">Micropost</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:micropost_id</span>])
+  <span class="ruby-ivar">@comment</span> = <span class="ruby-ivar">@micropost</span>.<span class="ruby-identifier">comments</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:comment</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:success</span>] = <span class="ruby-string">&quot;Comment created!&quot;</span>
+  <span class="ruby-keyword">else</span>
 
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">save</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@comment</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">'Comment was successfully created.'</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@comment</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@comment</span> }
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;new&quot;</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
-    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:failure</span>] = <span class="ruby-node">&quot;#{@comment.content}  An error happened&quot;</span>
   <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">micropost_path</span>(<span class="ruby-ivar">@micropost</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- create-source -->
           
@@ -231,20 +236,24 @@
 
         <div class="method-description">
           
-          <p>DELETE /comments/1 DELETE /comments/1.json</p>
+          <h1 id="method-i-destroy-label-Deletes+a+comment%3A">Deletes a comment:</h1>
+<ul><li>
+<p>locate comment</p>
+</li><li>
+<p>delete in database</p>
+</li><li>
+<p>redirect to post’s path</p>
+</li></ul>
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 74</span>
+            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
+  <span class="ruby-ivar">@micropost</span> = <span class="ruby-constant">Micropost</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:micropost_id</span>])
   <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">destroy</span>
-
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">comments_url</span> }
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">micropost_path</span>(<span class="ruby-ivar">@micropost</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- destroy-source -->
           
@@ -254,181 +263,6 @@
 
         
       </div><!-- destroy-method -->
-
-    
-      <div id="method-i-edit" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">edit</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>GET /comments/1/edit</p>
-          
-
-          
-          <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 36</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
-  <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- edit-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- edit-method -->
-
-    
-      <div id="method-i-index" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">index</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>GET /comments GET /comments.json</p>
-          
-
-          
-          <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 4</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
-  <span class="ruby-ivar">@comments</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">all</span>
-
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment"># index.html.erb</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@comments</span> }
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- index-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- index-method -->
-
-    
-      <div id="method-i-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>GET /comments/new GET /comments/new.json</p>
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 26</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">new</span>
-
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment"># new.html.erb</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@comment</span> }
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- new-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- new-method -->
-
-    
-      <div id="method-i-show" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">show</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>GET /comments/1 GET /comments/1.json</p>
-          
-
-          
-          <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 15</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> <span class="ruby-comment"># show.html.erb</span>
-    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@comment</span> }
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- show-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- show-method -->
-
-    
-      <div id="method-i-update" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">update</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>PUT /comments/1 PUT /comments/1.json</p>
-          
-
-          
-          <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/comments_controller.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-  <span class="ruby-ivar">@comment</span> = <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-
-  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:comment</span>])
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span> <span class="ruby-ivar">@comment</span>, <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">'Comment was successfully updated.'</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">head</span> <span class="ruby-value">:ok</span> }
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;edit&quot;</span> }
-      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">json</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">json</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">:unprocessable_entity</span> }
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- update-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- update-method -->
 
     
     </section><!-- public-instance-method-details -->

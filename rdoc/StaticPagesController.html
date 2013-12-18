@@ -103,11 +103,19 @@
   
     <li><a href="./CommentsHelper.html">CommentsHelper</a>
   
+    <li><a href="./Like.html">Like</a>
+  
+    <li><a href="./LikesController.html">LikesController</a>
+  
     <li><a href="./Micropost.html">Micropost</a>
   
     <li><a href="./MicropostsController.html">MicropostsController</a>
   
     <li><a href="./MicropostsHelper.html">MicropostsHelper</a>
+  
+    <li><a href="./Profile.html">Profile</a>
+  
+    <li><a href="./ProfilesController.html">ProfilesController</a>
   
     <li><a href="./Relationship.html">Relationship</a>
   
@@ -184,9 +192,14 @@
 
           
           <div class="method-source-code" id="home-source">
-            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 3</span>
+            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 4</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">home</span>
-      
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">signed_in?</span>
+    <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>
+      <span class="ruby-ivar">@micropost</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">microposts</span>.<span class="ruby-identifier">build</span>({<span class="ruby-identifier">wall_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">wall</span>.<span class="ruby-identifier">id</span>})
+    <span class="ruby-ivar">@friends</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-ivar">@microposts</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">newsfeed</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- home-source -->
           

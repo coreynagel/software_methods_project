@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class MicropostsController - Software Methods Project: The Facebook</title>
+<title>class Profile - Software Methods Project: The Facebook</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>app/controllers/microposts_controller.rb
+    <li>app/models/profile.rb
   </ul>
 </nav>
 
@@ -59,7 +59,7 @@
     <nav id="parent-class-section" class="section">
   <h3 class="section-header">Parent</h3>
   
-  <p class="link"><a href="ApplicationController.html">ApplicationController</a>
+  <p class="link">ActiveRecord::Base
   
 </nav>
 
@@ -70,13 +70,11 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-i-create">#create</a>
+    <li><a href="#method-i-birthdate">#birthdate</a>
     
-    <li><a href="#method-i-destroy">#destroy</a>
+    <li><a href="#method-i-default_values">#default_values</a>
     
-    <li><a href="#method-i-show">#show</a>
-    
-    <li><a href="#method-i-update">#update</a>
+    <li><a href="#method-i-filled_out">#filled_out</a>
     
   </ul>
 </nav>
@@ -158,7 +156,7 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class MicropostsController</h1>
+  <h1 class="class">class Profile</h1>
 
   <div id="description" class="description">
     
@@ -182,10 +180,10 @@
       <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-i-create" class="method-detail ">
+      <div id="method-i-birthdate" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">create</span><span
+          <span class="method-name">birthdate</span><span
             class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -193,38 +191,36 @@
 
         <div class="method-description">
           
-          
+          <p>VALID_DAY_REGEX = /(<a href="http://1-9">0</a>|<a href="http://012">1</a>)/
+VALID_MONTH_REGEX = /(<a href="http://1-9">0</a>|[<a
+href="http://0-9">12]</a>|<a href="http://01">3</a>)/ VALID_YEAR_REGEX =
+/(19|20)dd/ validates :birth_day, format: { with: VALID_DAY_REGEX }
+validates :birth_month, format: { with: VALID_MONTH_REGEX } validates
+:birth_year, format: { with: VALID_YEAR_REGEX }</p>
           
 
           
-          <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/microposts_controller.rb, line 13</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
-  <span class="ruby-ivar">@micropost</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">microposts</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:micropost</span>])
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@micropost</span>.<span class="ruby-identifier">save</span>
-    <span class="ruby-identifier">flash</span>[<span class="ruby-value">:success</span>] = <span class="ruby-string">&quot;Micropost created!&quot;</span>
-
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">wall</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@micropost</span>.<span class="ruby-identifier">wall</span>
-    <span class="ruby-identifier">redirect_back_or</span> <span class="ruby-identifier">root_path</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">user_path</span>(<span class="ruby-ivar">@micropost</span>.<span class="ruby-identifier">wall</span>.<span class="ruby-identifier">user</span>)
+          <div class="method-source-code" id="birthdate-source">
+            <pre><span class="ruby-comment"># File app/models/profile.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">birthdate</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">birth_day</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">birth_month</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">birth_year</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">birth_month</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">birth_day</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;/&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">birth_year</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- create-source -->
+          </div><!-- birthdate-source -->
           
         </div>
 
         
 
         
-      </div><!-- create-method -->
+      </div><!-- birthdate-method -->
 
     
-      <div id="method-i-destroy" class="method-detail ">
+      <div id="method-i-default_values" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">destroy</span><span
+          <span class="method-name">default_values</span><span
             class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -236,27 +232,32 @@
           
 
           
-          <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/microposts_controller.rb, line 30</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
-  <span class="ruby-ivar">@micropost</span> = <span class="ruby-constant">Micropost</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-  <span class="ruby-ivar">@micropost</span>.<span class="ruby-identifier">destroy</span>
-  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_path</span>
+          <div class="method-source-code" id="default_values-source">
+            <pre><span class="ruby-comment"># File app/models/profile.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">default_values</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">hometown</span> <span class="ruby-operator">||=</span> <span class="ruby-string">''</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">work</span> <span class="ruby-operator">||=</span> <span class="ruby-string">''</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">education</span> <span class="ruby-operator">||=</span> <span class="ruby-string">''</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">interests</span> <span class="ruby-operator">||=</span> <span class="ruby-string">''</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">birth_day</span> <span class="ruby-operator">||=</span> <span class="ruby-string">''</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">birth_month</span> <span class="ruby-operator">||=</span> <span class="ruby-string">''</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">birth_year</span> <span class="ruby-operator">||=</span> <span class="ruby-string">''</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">quote</span> <span class="ruby-operator">||=</span> <span class="ruby-string">''</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- destroy-source -->
+          </div><!-- default_values-source -->
           
         </div>
 
         
 
         
-      </div><!-- destroy-method -->
+      </div><!-- default_values-method -->
 
     
-      <div id="method-i-show" class="method-detail ">
+      <div id="method-i-filled_out" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">show</span><span
+          <span class="method-name">filled_out</span><span
             class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -268,50 +269,19 @@
           
 
           
-          <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/microposts_controller.rb, line 6</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
-  <span class="ruby-ivar">@micropost</span> = <span class="ruby-constant">Micropost</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
-  <span class="ruby-ivar">@comment</span> = <span class="ruby-ivar">@micropost</span>.<span class="ruby-identifier">comments</span>.<span class="ruby-identifier">build</span>
-  <span class="ruby-ivar">@comments</span> = <span class="ruby-ivar">@micropost</span>.<span class="ruby-identifier">comments</span>.<span class="ruby-identifier">all</span>
+          <div class="method-source-code" id="filled_out-source">
+            <pre><span class="ruby-comment"># File app/models/profile.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filled_out</span>
+  <span class="ruby-operator">!</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">hometown</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">work</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">education</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">birthdate</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">interests</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">or</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">quote</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>)
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- show-source -->
+          </div><!-- filled_out-source -->
           
         </div>
 
         
 
         
-      </div><!-- show-method -->
-
-    
-      <div id="method-i-update" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">update</span><span
-            class="method-args">()</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          
-          
-
-          
-          <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/microposts_controller.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- update-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- update-method -->
+      </div><!-- filled_out-method -->
 
     
     </section><!-- public-instance-method-details -->

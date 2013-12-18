@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(:version => 20131218003611) do
     t.datetime "updated_at"
   end
 
-  add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id"
+  add_index "profiles", ["user_id"], :name => "index_profiles_on_user_id", :unique => true
 
   create_table "relationships", :force => true do |t|
     t.integer  "user_id"
@@ -87,6 +87,6 @@ ActiveRecord::Schema.define(:version => 20131218003611) do
     t.datetime "updated_at"
   end
 
-  add_index "walls", ["user_id"], :name => "index_walls_on_user_id"
+  add_index "walls", ["user_id"], :name => "index_walls_on_user_id", :unique => true
 
 end

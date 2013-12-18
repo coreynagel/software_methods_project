@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_filter :signed_in_user
-
+  #= Update profile information from form
   def update
     @profile = Profile.find(params[:id])
     @user = @profile.user

@@ -2,7 +2,7 @@ class RelationshipsController < ApplicationController
   before_filter :signed_in_user
   before_filter :correct_user
 
-
+  #= Unfriend
   def destroy
     @relationship = Relationship.find(params[:id])
     @user = @relationship.user
@@ -12,12 +12,13 @@ class RelationshipsController < ApplicationController
   end
 
   private
-
+  #= Reroute user unless signed in
   def signed_in_user
     store_location
     redirect_to root_path, notice: "Please sign in." unless signed_in?
   end
-
+  #= Checks for friendship
+  #* Allows for user to see friends posts
   def correct_user
     @relationship = Relationship.find(params[:id])
     @user = @relationship.user

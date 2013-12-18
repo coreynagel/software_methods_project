@@ -189,12 +189,12 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-create-label-Saves+a+like+associeated+with+a+micropost+and+a+user">Saves a like associeated with a micropost and a user</h1>
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/likes_controller.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/controllers/likes_controller.rb, line 5</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@like</span> = <span class="ruby-constant">Like</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:like</span>])
   <span class="ruby-ivar">@post</span> = <span class="ruby-ivar">@like</span>.<span class="ruby-identifier">micropost</span>
@@ -225,12 +225,12 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-destroy-label-Deletes+a+like+when+unlike">Deletes a like when unlike</h1>
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/likes_controller.rb, line 14</span>
+            <pre><span class="ruby-comment"># File app/controllers/likes_controller.rb, line 15</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@like</span> = <span class="ruby-constant">Like</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@post</span> = <span class="ruby-ivar">@like</span>.<span class="ruby-identifier">micropost</span>

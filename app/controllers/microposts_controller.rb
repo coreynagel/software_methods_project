@@ -2,14 +2,15 @@ class MicropostsController < ApplicationController
         before_filter :signed_in_user, only: [:create, :show ,:update, :destroy]
         before_filter :user_or_friend, only: [:show]
         before_filter :correct_user, only: [:update, :destroy]
-
+#= Shows a single micropost with comments
 def show
   @micropost = Micropost.find(params[:id])
   @comment = @micropost.comments.build
   @comments = @micropost.comments.all
 end
 
-
+#= Creates a new micropost
+#* redirect to root
 def create
   @micropost = current_user.microposts.create(params[:micropost])
   if @micropost.save
@@ -26,7 +27,7 @@ end
 
 def update
 end
-
+#= Delete Micropost
 def destroy
   @micropost = Micropost.find(params[:id])
   @micropost.destroy

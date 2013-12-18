@@ -3,10 +3,12 @@ class UsersController < ApplicationController
                                         :friend_accept, :friend_deny, :friend_request, :unfriend]
   before_filter :correct_user,   only: [:edit, :update]
   
+  #= Show new user form
   def new
     @user = User.new
   end
-
+  #= Search users by last name
+  #* Allow you to friend users in results
   def search
     @search = params[:search]
     @users = User.search(@search)
@@ -15,6 +17,7 @@ class UsersController < ApplicationController
     @outgoing = current_user.outgoing_pending_friends
   end
 
+  #= Go to users wall
   def show
     @user = User.find(params[:id])
     @profile = @user.profile
@@ -27,6 +30,7 @@ class UsersController < ApplicationController
     end
   end
   
+  #= Save user form data
   def create
     @user = User.new(params[:user])
     @user.wall = Wall.create!
@@ -47,7 +51,7 @@ class UsersController < ApplicationController
     @incoming = @user.incoming_pending_friends.sort_by(&:first_name)
     @friends = @user.friends.sort_by(&:first_name)
   end
-
+  #= Update user info from form
   def update
     if @user.authenticate(params[:user][:current_password])
       if @user.update_attributes(params[:user])
@@ -64,24 +68,25 @@ class UsersController < ApplicationController
     end
   end
 
+  #= Request new friend ship
   def friend_request
     @user = User.find(params[:id])
     current_user.request_friend(@user)
     redirect_to user_path(@user)
   end
-
+  #= Accept new friend
   def friend_accept
     @user = User.find(params[:id])
     current_user.accept_friend(@user)
     redirect_to user_path(@user)
   end
-
+  #= Reject friend request
   def friend_deny
     @user = User.find(params[:id])
     current_user.unfriend(@user)
     redirect_to edit_user_path(current_user)
   end
-
+  #= unfriend a user
   def unfriend
     @user = User.find(params[:id])
     current_user.unfriend(@user)

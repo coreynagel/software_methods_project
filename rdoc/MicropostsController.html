@@ -193,12 +193,15 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-create-label-Creates+a+new+micropost">Creates a new micropost</h1>
+<ul><li>
+<p>redirect to root</p>
+</li></ul>
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/microposts_controller.rb, line 13</span>
+            <pre><span class="ruby-comment"># File app/controllers/microposts_controller.rb, line 14</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@micropost</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">microposts</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:micropost</span>])
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@micropost</span>.<span class="ruby-identifier">save</span>
@@ -232,12 +235,12 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-destroy-label-Delete+Micropost">Delete <a href="Micropost.html">Micropost</a></h1>
           
 
           
           <div class="method-source-code" id="destroy-source">
-            <pre><span class="ruby-comment"># File app/controllers/microposts_controller.rb, line 30</span>
+            <pre><span class="ruby-comment"># File app/controllers/microposts_controller.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">destroy</span>
   <span class="ruby-ivar">@micropost</span> = <span class="ruby-constant">Micropost</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@micropost</span>.<span class="ruby-identifier">destroy</span>
@@ -264,7 +267,7 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-show-label-Shows+a+single+micropost+with+comments">Shows a single micropost with comments</h1>
           
 
           
@@ -301,7 +304,7 @@
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/microposts_controller.rb, line 27</span>
+            <pre><span class="ruby-comment"># File app/controllers/microposts_controller.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- update-source -->

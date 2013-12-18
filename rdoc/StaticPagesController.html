@@ -187,12 +187,17 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-home-label-Where+is+home">Where is home</h1>
+<ul><li>
+<p>if signed in home is wall</p>
+</li><li>
+<p>not signed in sign in page is home</p>
+</li></ul>
           
 
           
           <div class="method-source-code" id="home-source">
-            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 4</span>
+            <pre><span class="ruby-comment"># File app/controllers/static_pages_controller.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">home</span>
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">signed_in?</span>
     <span class="ruby-ivar">@user</span> = <span class="ruby-identifier">current_user</span>

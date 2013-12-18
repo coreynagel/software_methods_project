@@ -1,6 +1,8 @@
 class StaticPagesController < ApplicationController
   before_filter :store_location
- 
+  #= Where is home
+  #* if signed in home is wall
+  #* not signed in sign in page is home
   def home
   	if signed_in?
       @user = current_user

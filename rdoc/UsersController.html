@@ -205,12 +205,12 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-create-label-Save+user+form+data">Save user form data</h1>
           
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 27</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>])
   <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">wall</span> = <span class="ruby-constant">Wall</span>.<span class="ruby-identifier">create!</span>
@@ -249,7 +249,7 @@
 
           
           <div class="method-source-code" id="edit-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 40</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@wall</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">wall</span>
@@ -278,12 +278,12 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-friend_accept-label-Accept+new+friend">Accept new friend</h1>
           
 
           
           <div class="method-source-code" id="friend_accept-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 70</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">friend_accept</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">accept_friend</span>(<span class="ruby-ivar">@user</span>)
@@ -310,12 +310,12 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-friend_deny-label-Reject+friend+request">Reject friend request</h1>
           
 
           
           <div class="method-source-code" id="friend_deny-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 76</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 84</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">friend_deny</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">unfriend</span>(<span class="ruby-ivar">@user</span>)
@@ -342,12 +342,12 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-friend_request-label-Request+new+friend+ship">Request new friend ship</h1>
           
 
           
           <div class="method-source-code" id="friend_request-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 64</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 72</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">friend_request</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">request_friend</span>(<span class="ruby-ivar">@user</span>)
@@ -374,12 +374,12 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-new-label-Show+new+user+form">Show new user form</h1>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 6</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 7</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
@@ -404,15 +404,21 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-search-label-Search+users+by+last+name">Search users by last name</h1>
+<ul><li>
+<p>Allow you to friend users in results</p>
+</li></ul>
           
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 10</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 12</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span>
   <span class="ruby-ivar">@search</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:search</span>]
   <span class="ruby-ivar">@users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">search</span>(<span class="ruby-ivar">@search</span>)
+  <span class="ruby-ivar">@friends</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">friends</span>
+  <span class="ruby-ivar">@incoming</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">incoming_pending_friends</span>
+  <span class="ruby-ivar">@outgoing</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">outgoing_pending_friends</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- search-source -->
           
@@ -435,12 +441,12 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-show-label-Go+to+users+wall">Go to users wall</h1>
           
 
           
           <div class="method-source-code" id="show-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 15</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 21</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-ivar">@profile</span> = <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">profile</span>
@@ -473,12 +479,12 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-unfriend-label-unfriend+a+user">unfriend a user</h1>
           
 
           
           <div class="method-source-code" id="unfriend-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 82</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 90</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">unfriend</span>
   <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>])
   <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">unfriend</span>(<span class="ruby-ivar">@user</span>)
@@ -505,12 +511,12 @@
 
         <div class="method-description">
           
-          
+          <h1 id="method-i-update-label-Update+user+info+from+form">Update user info from form</h1>
           
 
           
           <div class="method-source-code" id="update-source">
-            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 48</span>
+            <pre><span class="ruby-comment"># File app/controllers/users_controller.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>][<span class="ruby-value">:current_password</span>])
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:user</span>])

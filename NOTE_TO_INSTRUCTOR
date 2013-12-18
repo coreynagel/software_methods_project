@@ -27,7 +27,9 @@ Other possibly useful info:
     just go to the index, the updates to profile still save.
     we have only seen the bug a couple times and it hasn't been reproduced in a while
 
-     current email and passwords for profiles on the live version of the app:
+    A list of all users can be shown by searching with a blank form
+
+    current email and passwords for profiles on the live version of the app:
 
         corey@example.com    testing
         foobar@example.com   testing

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131212013935) do
+ActiveRecord::Schema.define(:version => 20131218003611) do
 
   create_table "comments", :force => true do |t|
     t.text     "content"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(:version => 20131212013935) do
   end
 
   add_index "comments", ["user_id", "micropost_id", "created_at"], :name => "index_comments_on_user_id_and_micropost_id_and_created_at"
+
+  create_table "likes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "micropost_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["user_id", "micropost_id"], :name => "index_likes_on_user_id_and_micropost_id", :unique => true
 
   create_table "microposts", :force => true do |t|
     t.text     "content"

@@ -11,6 +11,8 @@ SoftwareMethodsProject::Application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
+  resources :likes, :only => [:create, :destroy]
+
   resources :profiles, only: [:update]
 
   root to: 'static_pages#home'

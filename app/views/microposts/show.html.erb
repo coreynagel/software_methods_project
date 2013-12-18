@@ -10,11 +10,24 @@
       <% end  %>
     </h3>
      <hr>
-    <p><%= @micropost.content %></p>
+    <div class="content">
+      <%= @micropost.content %>
+    </div>
 
       <% if current_user?(@micropost.user) %>
           <%= render 'shared/delete_micropost', object: @micropost %>
       <% end %>
+
+
+      <div class="post-bar">
+        <div class="like like-btn" id="<%= @micropost.id %>_like_form">
+          <%= render 'likes/like_button', object: @micropost %>
+        </div>
+        <div class="like" id="<%= @micropost.id %>_likes">
+          Likes: <%= @micropost.likes.count ? @micropost.likes.count : 0 %>
+        </div>
+      </div>
+      <div style="border-bottom: 1px solid #e8e8e8;clear:both;position:relative;top:-25px"></div>
     </aside>
     <div class="span7 offset1">
       <h3>Comments on this Post</h3>
@@ -22,4 +35,5 @@
       <%= render '/microposts/comments' %>
       <%= render 'microposts/post_comment' %>
     </div>
+
 </div>

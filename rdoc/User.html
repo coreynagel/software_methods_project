@@ -64,7 +64,31 @@
 </nav>
 
     
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
     
+    <li><a href="#method-c-search">::search</a>
+    
+    <li><a href="#method-i-accept_friend">#accept_friend</a>
+    
+    <li><a href="#method-i-has_like-3F">#has_like?</a>
+    
+    <li><a href="#method-i-mutual_friends">#mutual_friends</a>
+    
+    <li><a href="#method-i-name">#name</a>
+    
+    <li><a href="#method-i-newsfeed">#newsfeed</a>
+    
+    <li><a href="#method-i-request_friend">#request_friend</a>
+    
+    <li><a href="#method-i-unfriend">#unfriend</a>
+    
+  </ul>
+</nav>
+
   </div>
 
   <div id="project-metadata">
@@ -93,11 +117,19 @@
   
     <li><a href="./CommentsHelper.html">CommentsHelper</a>
   
+    <li><a href="./Like.html">Like</a>
+  
+    <li><a href="./LikesController.html">LikesController</a>
+  
     <li><a href="./Micropost.html">Micropost</a>
   
     <li><a href="./MicropostsController.html">MicropostsController</a>
   
     <li><a href="./MicropostsHelper.html">MicropostsHelper</a>
+  
+    <li><a href="./Profile.html">Profile</a>
+  
+    <li><a href="./ProfilesController.html">ProfilesController</a>
   
     <li><a href="./Relationship.html">Relationship</a>
   
@@ -167,6 +199,281 @@
 
     <!-- Methods -->
     
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-search" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">search</span><span
+            class="method-args">(search)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="search-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">search</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">search</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">env</span>.<span class="ruby-identifier">production?</span>
+      <span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">'last_name ILIKE ?'</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>])
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">find</span>(<span class="ruby-value">:all</span>, <span class="ruby-value">:conditions</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">'last_name LIKE ?'</span>, <span class="ruby-node">&quot;%#{search}%&quot;</span>])
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- search-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- search-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-accept_friend" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">accept_friend</span><span
+            class="method-args">(new_friend)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="accept_friend-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">accept_friend</span>(<span class="ruby-identifier">new_friend</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">relationships</span>.<span class="ruby-identifier">find_by_friend_id</span>(<span class="ruby-identifier">new_friend</span>).<span class="ruby-identifier">confirmed</span> <span class="ruby-operator">==</span> <span class="ruby-string">'requested'</span>
+    <span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">relationships</span>.<span class="ruby-identifier">find_by_friend_id</span>(<span class="ruby-identifier">new_friend</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:confirmed</span>, <span class="ruby-string">'accepted'</span>)
+      <span class="ruby-identifier">new_friend</span>.<span class="ruby-identifier">relationships</span>.<span class="ruby-identifier">find_by_friend_id</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">update_attribute</span>(<span class="ruby-value">:confirmed</span>, <span class="ruby-string">'accepted'</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- accept_friend-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- accept_friend-method -->
+
+    
+      <div id="method-i-has_like-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">has_like?</span><span
+            class="method-args">(micropost)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="has_like-3F-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_like?</span> <span class="ruby-identifier">micropost</span>
+  <span class="ruby-identifier">likes</span>.<span class="ruby-identifier">find_by_micropost_id</span> <span class="ruby-identifier">micropost</span>.<span class="ruby-identifier">id</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- has_like-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- has_like-3F-method -->
+
+    
+      <div id="method-i-mutual_friends" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">mutual_friends</span><span
+            class="method-args">(friend)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="mutual_friends-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">mutual_friends</span>(<span class="ruby-identifier">friend</span>)
+  <span class="ruby-identifier">mutual</span> = []
+  <span class="ruby-identifier">friends</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">friends</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">f</span>)
+       <span class="ruby-identifier">mutual</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">f</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">mutual</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">friend</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">mutual</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- mutual_friends-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- mutual_friends-method -->
+
+    
+      <div id="method-i-name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">name</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="name-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-node">&quot;#{self.first_name} #{self.last_name}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- name-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- name-method -->
+
+    
+      <div id="method-i-newsfeed" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">newsfeed</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="newsfeed-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">newsfeed</span>
+  <span class="ruby-identifier">friend_ids</span> = <span class="ruby-string">&quot;SELECT friend_id FROM relationships WHERE user_id = :user_id AND confirmed = 'accepted' &quot;</span>
+  <span class="ruby-constant">Micropost</span>.<span class="ruby-identifier">where</span>(<span class="ruby-node">&quot;user_id IN (#{friend_ids}) OR user_id = :user_id&quot;</span>, <span class="ruby-identifier">user_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- newsfeed-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- newsfeed-method -->
+
+    
+      <div id="method-i-request_friend" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">request_friend</span><span
+            class="method-args">(other_user)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="request_friend-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">request_friend</span>(<span class="ruby-identifier">other_user</span>)
+  <span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">relationships</span>.<span class="ruby-identifier">create!</span>([<span class="ruby-identifier">friend_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">other_user</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">confirmed</span><span class="ruby-operator">:</span> <span class="ruby-string">'pending'</span> ])
+    <span class="ruby-identifier">other_user</span>.<span class="ruby-identifier">relationships</span>.<span class="ruby-identifier">create!</span>([<span class="ruby-identifier">friend_id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>, <span class="ruby-identifier">confirmed</span><span class="ruby-operator">:</span> <span class="ruby-string">'requested'</span>])
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- request_friend-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- request_friend-method -->
+
+    
+      <div id="method-i-unfriend" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">unfriend</span><span
+            class="method-args">(friend)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="unfriend-source">
+            <pre><span class="ruby-comment"># File app/models/user.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">unfriend</span>(<span class="ruby-identifier">friend</span>)
+  <span class="ruby-identifier">relationships</span>.<span class="ruby-identifier">find_by_friend_id</span>(<span class="ruby-identifier">friend</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">destroy</span>
+  <span class="ruby-identifier">friend</span>.<span class="ruby-identifier">relationships</span>.<span class="ruby-identifier">find_by_friend_id</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">destroy</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- unfriend-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- unfriend-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
   </section><!-- 5Buntitled-5D -->
 
 </div><!-- documentation -->

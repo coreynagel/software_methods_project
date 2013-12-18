@@ -4,6 +4,7 @@
     <% else %>
         Your Friends
     <% end %>
+    (<%= @friends.count ? @friends.count: 0 %>)
   </h3>
   <hr>
   <% if @friends.any? %>

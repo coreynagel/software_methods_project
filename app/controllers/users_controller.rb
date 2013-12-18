@@ -10,6 +10,9 @@ class UsersController < ApplicationController
   def search
     @search = params[:search]
     @users = User.search(@search)
+    @friends = current_user.friends
+    @incoming = current_user.incoming_pending_friends
+    @outgoing = current_user.outgoing_pending_friends
   end
 
   def show

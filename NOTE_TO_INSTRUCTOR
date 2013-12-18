@@ -1,0 +1,34 @@
+
+
+Minor changes from the original project design:
+
+Newsfeed only shows your posts and posts by your friends instead of all posts on your friends walls, which I believe is closer to how facebook actually works.
+
+Additional Features:
+
+    Like button:
+        Each post has a like button for all users that can view it.
+        Once liked, the post can be unliked.
+        A total count of likes is kept for each post and placed next to the like button
+        ujs handles the swap out of like to unlike without page reload
+
+    Comments:
+        a comments like with the number of comments next to it is available for each post
+        when followed, the link takes you to a page that shows the micropost on the left
+        and any comments as well as a comment form on the right
+
+    Deletion:
+        both posts can comments can be deleted by the user that created them
+
+
+Other possibly useful info:
+    this may no longer be a problem, as we are pretty sure it is fixed, after updating profile,
+    the server doesn't redirect to the user edit page and cant find it.  if this happens,
+    just go to the index, the updates to profile still save.
+    we have only seen the bug a couple times and it hasn't been reproduced in a while
+
+     current email and passwords for profiles on the live version of the app:
+
+        corey@example.com    testing
+        foobar@example.com   testing
+        user1@example.com   testing

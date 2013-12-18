@@ -16,6 +16,9 @@
         <% @users.each do |f|%>
             <h4>
               <%= link_to f.name, user_path(f) %>
+              <% if !@friends.include?(f) and !@incoming.include?(f) and !@outgoing.include?(f) and f != current_user %>
+                <%= link_to "Request Friend", friend_request_user_path(f), class:"btn btn-primary btn-mini" %>
+              <% end %>
             </h4>
         <% end %>
     <% end %>

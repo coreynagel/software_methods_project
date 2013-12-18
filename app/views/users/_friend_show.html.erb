@@ -9,7 +9,10 @@
     </section>
     <section>
       <% if @user != current_user %>
-          <h3>Mutual Friends</h3>
+          <h3>
+            Mutual Friends
+            (<%= @mutual_friends.count ? @mutual_friends.count: 0 %>)
+          </h3>
           <hr>
           <% if @mutual_friends.any? %>
               <% @mutual_friends.each do |m| %>

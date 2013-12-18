@@ -1,0 +1,24 @@
+<section>
+  <h3><% if current_user != @user %>
+        <%= "#{@user.first_name}'s friends" %>
+    <% else %>
+        Your Friends
+    <% end %>
+  </h3>
+  <hr>
+  <% if @friends.any? %>
+      <% @friends.each do |f|%>
+          <h4 class="row">
+            <%= link_to f.name, user_path(f)%>
+            <% if current_page?(edit_user_path(current_user)) %>
+                <%= render 'shared/unfriend', object:f %>
+            <% end %>
+          </h4>
+      <% end %>
+  <% else %>
+      You currently have no friends
+      <br>
+      Search for new friends <%= link_to "HERE!", search_path %>
+
+  <% end %>
+</section>

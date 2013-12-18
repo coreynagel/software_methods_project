@@ -1,14 +1,14 @@
 class StaticPagesController < ApplicationController
+  before_filter :store_location
  
   def home
   	if signed_in?
+      @user = current_user
     	@micropost = current_user.microposts.build({wall_id: current_user.wall.id})
-      @microposts = current_user.microposts.all
       @friends = current_user.friends.all
-      @friends.each do |f|
-          @microposts +=  f.microposts.all
-      end
+      @microposts = current_user.newsfeed
     end
   end
   
 end
+

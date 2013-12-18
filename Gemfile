@@ -26,19 +26,19 @@ group :test do
 end
 group :production do
   gem 'pg'
+  gem 'rails_12factor', '0.0.2'
 end
 
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails', '~> 3.1.0'
-  gem 'coffee-rails', '~> 3.1.0'
 
-  gem 'uglifier'
-end
-
-gem 'jquery-rails'
+gem 'uglifier', '2.1.1'
+gem 'sass-rails', '~> 3.1.0'
+gem 'coffee-rails', '~> 3.1.0'
+gem 'jquery-rails', '3.0.4'
+gem 'turbolinks', '1.1.1'
+gem 'jbuilder', '1.0.2'
 
 
 

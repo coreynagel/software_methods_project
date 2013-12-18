@@ -6,9 +6,10 @@ class User < ActiveRecord::Base
 
   has_many :microposts , dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_one :wall, dependent: :destroy
+  has_many :likes
 
-  before_save { self.wall = Wall.create! }
+  has_one :wall, dependent: :destroy
+  has_one :profile, dependent: :destroy
 
   has_many :relationships , dependent: :destroy
   has_many :friends, through: :relationships, conditions: "confirmed =  'accepted'"
@@ -66,6 +67,25 @@ class User < ActiveRecord::Base
     end
     mutual.delete(friend)
     return mutual
+  end
+
+  def self.search(search)
+    if search
+      if Rails.env.production?
+        find(:all, :conditions => ['last_name ILIKE ?', "%#{search}%"])
+      else
+        find(:all, :conditions => ['last_name LIKE ?', "%#{search}%"])
+      end
+    end
+  end
+
+  def newsfeed
+    friend_ids = "SELECT friend_id FROM relationships WHERE user_id = :user_id AND confirmed = 'accepted' "
+    Micropost.where("user_id IN (#{friend_ids}) OR user_id = :user_id", user_id: self.id)
+  end
+
+  def has_like? micropost
+    likes.find_by_micropost_id micropost.id
   end
 
   private

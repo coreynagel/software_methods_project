@@ -1,5 +1,4 @@
 SoftwareMethodsProject::Application.routes.draw do
-  resources :friendships
 
   resources :users do
     member do
@@ -12,18 +11,23 @@ SoftwareMethodsProject::Application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
 
+  resources :likes, :only => [:create, :destroy]
+
+  resources :profiles, only: [:update]
 
   root to: 'static_pages#home'
 
   match '/signup',  to: 'users#new'
   match '/signout', to: 'sessions#destroy', via: :delete
-  match '/search', to: 'users#index'
+  match '/search', to: 'users#search'
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :relationships, only: [:destroy]
-
-  resources :walls, only: [:destroy]
+  resources :walls do
+    member do
+      get :empty
+    end
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

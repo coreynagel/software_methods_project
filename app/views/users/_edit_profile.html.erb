@@ -1,0 +1,62 @@
+<div>
+  <h3>
+    Update Profile
+  </h3>
+  <hr>
+    <%= form_for(@profile) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        Hometown:
+        <%= f.text_field :hometown, class: "small-field" %>
+        <br>
+        Birthday (mm/dd/yyyy):
+        <%= f.text_field :birth_month, class: "date-field"%>/
+        <%= f.text_field :birth_day, class: "date-field" %>/
+        <%= f.text_field :birth_year, class: "date-field" %>
+        <br>
+        School:
+        <%= f.text_field :education, class: "mid-field" %>
+        <br>
+        Work:
+        <%= f.text_field :work, class: "mid-field" %>
+        <br>
+        Personal Quote:
+        <br>
+        <%= f.text_field :quote %>
+        <br>
+        Interests:
+        <%= f.text_area :interests %>
+        <br>
+        <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+</div>
+<div class="clear-wall">
+  <h3>Clear Your Wall</h3>
+  <hr>
+  WARNING!! This will remove all posts from your wall permanently.
+  <br>
+  <br>
+  <%= link_to "Clear Wall", empty_wall_path(@wall), class: "btn btn-danger",
+              data: { confirm: "You sure?" } %>
+</div>
+<div>
+  <h3>Update Settings</h3>
+  <hr>
+    <%= form_for(@user) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+
+        <%= f.label :email %>
+        <%= f.text_field :email, class: "mid-field" %>
+
+        <%= f.label "Current Password" %>
+        <%= f.password_field :current_password, class: "mid-field" %>
+
+        <%= f.label :password, "New Password" %>
+        <%= f.password_field :password, class: "mid-field" %>
+
+        <%= f.label :password_confirmation, "Confirm New Password" %>
+        <%= f.password_field :password_confirmation, class: "mid-field" %>
+        <br>
+        <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+</div>

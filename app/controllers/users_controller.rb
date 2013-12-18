@@ -1,17 +1,21 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:show, :edit, :update, :destroy]
+  before_filter :signed_in_user, only: [:show, :edit, :update, :search,
+                                        :friend_accept, :friend_deny, :friend_request, :unfriend]
   before_filter :correct_user,   only: [:edit, :update]
   
   def new
     @user = User.new
   end
 
-  def index
-
+  def search
+    @search = params[:search]
+    @users = User.search(@search)
   end
 
   def show
     @user = User.find(params[:id])
+    @profile = @user.profile
+    @friends = @user.friends.sort_by(&:first_name)
     @micropost = current_user.microposts.build({wall_id: @user.wall.id})
     @microposts = @user.wall.microposts.all
     @mutual_friends = []
@@ -22,7 +26,8 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-
+    @user.wall = Wall.create!
+    @user.profile = Profile.create!
     if @user.save
       sign_in @user
       flash[:success] = "Welcome to the Facebook Project!"
@@ -34,32 +39,50 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @wall = @user.wall
+    @profile = @user.profile
     @incoming = @user.incoming_pending_friends.sort_by(&:first_name)
     @friends = @user.friends.sort_by(&:first_name)
+  end
+
+  def update
+    if @user.authenticate(params[:user][:current_password])
+      if @user.update_attributes(params[:user])
+        flash[:success] = "Settings updated"
+        sign_in @user
+        redirect_to edit_user_path(@user)
+      else
+        flash[:failure] = "Something went wrong"
+        render 'edit'
+      end
+    else
+      flash[:failure] = "Wrong Current Password"
+      redirect_to edit_user_path(@user)
+    end
   end
 
   def friend_request
     @user = User.find(params[:id])
     current_user.request_friend(@user)
-    redirect_back_or(root_path)
+    redirect_to user_path(@user)
   end
 
   def friend_accept
     @user = User.find(params[:id])
     current_user.accept_friend(@user)
-    redirect_back_or(root_path)
+    redirect_to user_path(@user)
   end
 
   def friend_deny
     @user = User.find(params[:id])
     current_user.unfriend(@user)
-    redirect_back_or(root_path)
+    redirect_to edit_user_path(current_user)
   end
 
   def unfriend
     @user = User.find(params[:id])
     current_user.unfriend(@user)
-    redirect_back_or(root_path)
+    redirect_to edit_user_path(current_user)
   end
 
   private

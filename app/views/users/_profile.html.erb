@@ -1,0 +1,34 @@
+
+<% if @profile.filled_out %>
+<% if !@profile.hometown.empty? %>
+  <b>Hometown: </b><%= @profile.hometown %>
+  <br>
+<% end %>
+<% if !@profile.birthdate.nil? %>
+  <b>Born: </b><%= @profile.birthdate %>
+  <br>
+<% end %>
+
+<% if !@profile.education.empty? %>
+  <b>School: </b><%= @profile.education %>
+  <br>
+<% end %>
+<% if !@profile.work.empty? %>
+  <b>Work: </b><%= @profile.work %>
+  <br>
+<% end %>
+<% if @profile.quote.length > 2 %>
+    <b>Personal Quote: </b><%= @profile.quote%>
+    <br>
+<% end %>
+<% if !@profile.interests.empty? %>
+    <b>Interests: </b><%= @profile.interests %>
+<% end %>
+
+<% else %>
+No Profile Created Yet
+    <br>
+    <% if @user == current_user %>
+        Fill out your Profile <%= link_to "HERE!", edit_user_path(@user) %>
+    <% end %>
+<% end %>

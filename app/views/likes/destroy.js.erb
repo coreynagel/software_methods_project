@@ -1,0 +1,2 @@
+$("#<%= @postnum%>_like_form").html("<%= escape_javascript render('likes/like_button') %>");
+$("#<%= @postnum%>_likes").html('Likes: <%= @post.likes.count ? @post.likes.count : 0 %>')

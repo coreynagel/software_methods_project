@@ -1,7 +1,7 @@
-<li>
-  <h5 class="author"><%=micropost.user.name + " posted " %>
+<li id="<%= micropost.id %>">
+  <h5><%= link_to micropost.user.name, user_path(micropost.user) %> posted
     <% if not micropost.user == micropost.wall.user %>
-        on <%= micropost.wall.user.name %>'s wall
+        on <%= link_to micropost.wall.user.name + "'s ", user_path(micropost.wall.user) %>wall
     <% end  %>
     <% if current_user?(micropost.user) %>
         <%= render 'shared/delete_micropost', object: micropost %>
@@ -9,9 +9,14 @@
   </h5>
   <span class="content"><%= micropost.content %></span>
 
-  <div>
+  <div class="post-bar">
+    <div class="like like-btn" id="<%= micropost.id %>_like_form">
+        <%= render 'likes/like_button', object: micropost %>
+    </div>
+    <div class="like" id="<%= micropost.id %>_likes">
+      Likes: <%= micropost.likes.count ? micropost.likes.count : 0 %>
+    </div>
     <%= link_to "Comments (#{micropost.comments.count})", micropost_path(micropost) %>
-
     <span class="timestamp pull-right">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
    </span>

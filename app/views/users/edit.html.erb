@@ -1,12 +1,11 @@
 <div class="row">
     <aside class="span4">
       <section>
-        <% if @incoming %>
-          <h3>
-            Friend Requests
-          </h3>
-          <hr>
-
+        <h3>
+          Friend Requests
+        </h3>
+        <hr>
+        <% if @incoming.any? %>
           <% @incoming.each do |i| %>
               <h4>
                 <%= i.name %>
@@ -16,29 +15,14 @@
                 <%= render 'shared/deny_friend', object:i %>
               </h4>
            <% end %>
+        <% else %>
+            No friend requests at this time
         <% end %>
       </section>
-      <section>
-        <h3>
-          Your Friends
-        </h3>
-        <hr>
-        <% if @friends %>
-            <% @friends.each do |f|%>
-                <h4 class="row">
-                  <%= link_to f.name, user_path(f)%>
-                  <%= render 'shared/unfriend', object:f %>
-                </h4>
-            <% end %>
-        <% end %>
-      </section>
+      <%= render 'shared/list_friends' %>
     </aside>
 
-    <div class="span7">
-      <h3>
-        Update Profile
-      </h3>
-      <hr>
-
+    <div class="span7 offset1">
+      <%= render 'users/edit_profile' %>
     </div>
 </div>

@@ -4,6 +4,7 @@ class Micropost < ActiveRecord::Base
   belongs_to :wall
 
   has_many :comments, dependent: :destroy
+  has_many :likes
 
   validates :user_id, presence: true
   validates :wall_id, presence: true
